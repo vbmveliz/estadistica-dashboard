@@ -187,11 +187,14 @@ include 'header.php';
             });
             datosResumen.forEach(datosSuma => {
             let numero = Number(datosSuma[3]);
+            var operacion = (numero*100)/total
+            let porcentaje= Number(operacion.toFixed(2));
             template += `
                     <tr class="porcentaje">
                         <td>${datosSuma[0]}</td>
                         <td>${datosSuma[1]}</td>
-                        <td>${Math.round((numero*100)/total)+" %"}</td>
+                        
+                        <td>${porcentaje+" %"}</td>
                     </tr>
                     `
             });

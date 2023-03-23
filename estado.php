@@ -193,7 +193,6 @@ include 'header.php';
                     <tr class="porcentaje">
                         <td>${datosSuma[0]}</td>
                         <td>${datosSuma[1]}</td>
-                        
                         <td>${porcentaje+" %"}</td>
                     </tr>
                     `

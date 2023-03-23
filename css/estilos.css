@@ -1,0 +1,22 @@
+.divider:after,
+.divider:before {
+content: "";
+flex: 1;
+height: 1px;
+background: #eee;
+}
+.h-custom {
+height: calc(100% - 73px);
+}
+.color__alab{
+    background-color: rgb(0, 173, 78);
+    color: white;
+}
+.bg_secundary_alab{
+    background-color: #757575;
+}
+@media (max-width: 450px) {
+.h-custom {
+height: 100%;
+}
+}

@@ -79,7 +79,61 @@ $(function () {
           if(resp == "error"){
             alert("No se encontró registros.");
           }else{
-            console.log(resp);
+            var titulo = [];
+            var cantidad = [];
+            var data = JSON.parse(resp);
+            for(var i = 0; i < data.length; i++){
+                titulo.push(data[i][0]);
+                cantidad.push(data[i][4]);
+            }
+            var salesChart = new Chart(salesChartCanvas, {
+              type: 'pie',
+              data: {
+                labels: titulo,
+                datasets: [{
+                label: 'Día que tiene mayor',
+                data: cantidad,
+                backgroundColor:[
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(153, 102, 255, 0.5)',
+                    'rgba(255, 159, 64, 0.5)'
+                ]
+                }]
+              },
+              options: pieOptions
+            })
+            var pieChartCanvas = $('#sales-chart-canvas');
+            var pieData = {
+              labels: titulo,
+              datasets: [
+                {
+                  data: cantidad,
+                  backgroundColor:[
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(153, 102, 255, 0.5)',
+                    'rgba(255, 159, 64, 0.5)'
+                  ]
+                }
+              ]
+            }
+            var pieOptions = {
+              legend: {
+                display: false
+              },
+              maintainAspectRatio: false,
+              responsive: true
+            }
+            var pieChart = new Chart(pieChartCanvas, {
+              type: 'pie',
+              data: pieData,
+              options: pieOptions
+            })
           }
         })
         return false;
@@ -87,6 +141,73 @@ $(function () {
       
     }
   })
+
+/* Consultar Estado de OS */
+
+$('#btnConsultarEstado').click(function(){
+  var estadoOs = document.getElementById('OSEstado');
+  var valueEstadoOs = estadoOs.options[estadoOs.selectedIndex].value;
+  $('#sales-chart').empty();
+  $('#sales-chart').append('<canvas id="sales-chart-canvas" height="500" style="height: 500px;"></canvas>');
+  $.ajax({
+      url : 'scripts/controlador_grafico_1_2.php',
+      type : 'POST',
+      data: {valueEstadoOs: valueEstadoOs}
+  }).done(function(resp){
+    if(resp == "error"){
+      alert("No se encontró registros.");
+    }else{
+      var titulo = [];
+      var cantidad = [];
+      var data = JSON.parse(resp);
+      for(var i = 0; i < data.length; i++){
+          titulo.push(data[i][0]);
+          cantidad.push(data[i][1]);
+      }
+      var donutChartCanvas = $('#sales-chart-canvas');
+      var donutData        = {
+      labels: titulo,
+      datasets: [
+          {
+          data: cantidad,
+          backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
+          }
+      ]
+      }
+      var donutOptions     = {
+      maintainAspectRatio : false,
+      responsive : true,
+      }
+      new Chart(donutChartCanvas, {
+      type: 'pie',
+      data: donutData,
+      options: donutOptions
+      })
+      let template = '';
+      let total = 0;
+      data.forEach(datos => {
+      let numero = Number(datos[1]);
+      //cuando quieres validar el tipo de dato de un valor se usa lo siguiente
+      total += numero;
+      });
+      data.forEach(datosSuma => {
+      let numero = Number(datosSuma[1]);
+      var operacion = (numero*100)/total
+      let porcentaje= Number(operacion.toFixed(2));
+      template += `
+              <tr class="porcentaje">
+                  <td>${valueEstadoOs}</td>
+                  <td>${datosSuma[0]}</td>
+                  <td>${porcentaje+" %"}</td>
+              </tr>
+              `
+      });
+      $('#tablaResumen').html(template);
+    }
+  })
+  return false;
+});
+
   // The Calender
   $('#calendar').datetimepicker({
     format: 'L',

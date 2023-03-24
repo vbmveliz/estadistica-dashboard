@@ -131,11 +131,11 @@ include 'header.php';
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <select class="form-control" id="OSEstado">
-                                    <option>Generado</option>
-                                    <option>Solicitud Preparación Materiales</option>
-                                    <option>Recepción Preparando Materiales</option>
-                                    <option>Cliente Recibé los Materiales</option>
-                                    <option>Finalizado / Atendido</option>
+                                    <option>Generado a solicitud de Preparación</option>
+                                    <option>Solicitud de preparación a recepción de Solicitud</option>
+                                    <option>Recepción de solicitud a preparación de Materiales</option>
+                                    <option>Preparación de Material a Entrega Cliente</option>
+                                    <option>Entrega Cliente a Finalizado</option>
                                 </select>
                             </div>
                         </div>
@@ -163,11 +163,11 @@ include 'header.php';
                 </div>
               </div>
               <div class="card-body">
-                <div class="chart" style="height: 500px; overflow:scroll;">
+                <div class="chart" style="height: 555px; overflow:scroll;">
                   <table class="table table-striped">
                     <thead>
                       <tr>
-                        <th>EOS</th>
+                        <th>Grupo</th>
                         <th># Días</th>
                         <th>% OS</th>
                       </tr>

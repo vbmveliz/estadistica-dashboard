@@ -159,8 +159,6 @@ include 'header.php';
                   <i class="fas fa-th mr-1"></i>
                   Datos Resumen
                 </h3>
-                <div class="card-tools">
-                </div>
               </div>
               <div class="card-body">
                 <div class="chart" style="height: 555px; overflow:scroll;">
@@ -169,6 +167,7 @@ include 'header.php';
                       <tr>
                         <th>Grupo</th>
                         <th># Días</th>
+                        <th>Cantidad</th>
                         <th>% OS</th>
                       </tr>
                     </thead>

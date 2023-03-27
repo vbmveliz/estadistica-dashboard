@@ -33,6 +33,8 @@ $url = $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"];
     <!-- summernote -->
     <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
 
+    <link rel="stylesheet" href="css/estilos.css">
+
     <script src="https://kit.fontawesome.com/60213d354c.js" crossorigin="anonymous"></script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -46,7 +48,7 @@ $url = $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"];
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="index.html" class="nav-link">Estadísticas</a>
+                <a href="index.php" class="nav-link">Estadísticas</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="mailto:esuarez@alab.com.pe" class="nav-link">Soporte Técnico</a>
@@ -66,7 +68,7 @@ $url = $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"];
         </ul>
     </nav>
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
-        <a href="index.html" class="brand-link">
+        <a href="index.php" class="brand-link">
             <img src="https://alab.com.pe/img/apple-touch-icon-57x57-precomposed.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
             <span class="brand-text font-weight-light">ALAB</span>
         </a>

@@ -146,6 +146,14 @@ include 'header.php';
         var estadoOs = document.getElementById('OSEstado');
         var valueEstadoOs = estadoOs.options[estadoOs.selectedIndex].value;
         $('#graficoEstado').empty();
+        const myTimeout1 = setTimeout(myGreeting1, 100);
+        function myGreeting1() {
+            $('#graficoEstado').append('<div class="spinner" id="spinner"></div>');
+        }
+        const myTimeout2 = setTimeout(myGreeting2, 150);
+        function myGreeting2() {
+            document.getElementById("spinner").classList.add('d-none');
+        }
         $('#graficoEstado').append('<canvas id="donutChart" style="min-height: 555px; height: 555px; max-height: 555px; max-width: 100%;"></canvas>');
         $.ajax({
             url : 'scripts/controlador_grafico_2.php',

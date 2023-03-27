@@ -64,6 +64,14 @@ $(function () {
           alert("Solamente departamentos donde tiene sede ALAB");
         }
         $('#sales-chart').empty();
+        const myTimeout1 = setTimeout(myGreeting1, 100);
+        function myGreeting1() {
+          $('#sales-chart').append('<div class="spinner" id="spinner"></div>');
+        }
+        const myTimeout2 = setTimeout(myGreeting2, 2000);
+        function myGreeting2() {
+            document.getElementById("spinner").classList.add('d-none');
+        }
         $('#sales-chart').append('<canvas id="sales-chart-canvas" height="500" style="height: 500px;"></canvas>');
         var estado = document.getElementById('estado');
         var valueEstado = estado.options[estado.selectedIndex].value;
@@ -148,6 +156,14 @@ $('#btnConsultarEstado').click(function(){
   var estadoOs = document.getElementById('OSEstado');
   var valueEstadoOs = estadoOs.options[estadoOs.selectedIndex].value;
   $('#sales-chart').empty();
+  const myTimeout1 = setTimeout(myGreeting1, 100);
+  function myGreeting1() {
+    $('#sales-chart').append('<div class="spinner" id="spinner"></div>');
+  }
+  const myTimeout2 = setTimeout(myGreeting2, 13000);
+  function myGreeting2() {
+      document.getElementById("spinner").classList.add('d-none');
+  }
   $('#sales-chart').append('<canvas id="sales-chart-canvas" height="500" style="height: 500px;"></canvas>');
   $.ajax({
       url : 'scripts/controlador_grafico_1_2.php',
@@ -197,7 +213,8 @@ $('#btnConsultarEstado').click(function(){
       template += `
               <tr class="porcentaje">
                   <td>${valueEstadoOs}</td>
-                  <td>${datosSuma[0]}</td>
+                  <td><button class="btn btn-outline-info" dia="${datosSuma[0]}" estado="${valueEstadoOs}"  onclick="mostrar(this)" data-toggle="modal" data-target="#myModal">${datosSuma[0]}</button></td>s
+                  <td>${numero}</td>
                   <td>${porcentaje+" %"}</td>
               </tr>
               `
@@ -225,3 +242,32 @@ $('#btnConsultarEstado').click(function(){
   // $('#revenue-chart').get(0).getContext('2d');
   });
 
+  function mostrar(btn){
+
+    let dia = $(btn).attr("dia");
+    let estado = $(btn).attr("estado");
+    $.ajax({
+      url : 'scripts/controlador_tabla_1.php',
+      type : 'POST',
+      data: {dia: dia, estado: estado}
+    }).done(function(resp){
+      if(resp == "error"){
+        alert("No se encontró registros.");
+      }else{
+        let template = '';
+        var data = JSON.parse(resp);
+        data.forEach(datos => {
+        template += `
+                <tr>
+                    <td>${datos[0]}</td>
+                    <td>${datos[1]}</td>s
+                    <td>${datos[2]}</td>
+                    <td>${datos[10]}</td>
+                </tr>
+                `
+        });
+        $('#tablaDetalle').html(template);
+      }
+    })
+  
+  }

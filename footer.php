@@ -4,6 +4,41 @@
     </footer>
     <aside class="control-sidebar control-sidebar-dark">
     </aside>
+    <!-- The Modal -->
+    <div class="modal" id="myModal">
+        <div class="modal-dialog" style="max-width: 900px;">
+        <div class="modal-content">
+        
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div style="overflow:scroll;">
+                    <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>OS</th>
+                            <th>Unidad</th>
+                            <th>Fecha de Solicitud</th>
+                            <th>Fecha Cerrrada</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaDetalle">
+                    </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Modal footer -->
+            <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+            
+        </div>
+        </div>
+    </div>
 </div>
 <!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>

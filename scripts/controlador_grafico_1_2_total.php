@@ -16,7 +16,7 @@
     }
 
     $MG = new Modelo_Grafico();
-    $consulta = $MG -> TraerDatosGraficobar2($valueEstadoOs);
+    $consulta = $MG -> TraerDatosGraficobar2_1($valueEstadoOs);
     if(empty($consulta)){
         echo "error";
     }else{

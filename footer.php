@@ -6,31 +6,32 @@
     </aside>
     <!-- The Modal -->
     <div class="modal" id="myModal">
-        <div class="modal-dialog" style="max-width: 900px;">
-        <div class="modal-content">
-        
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <!-- Modal body -->
-            <div class="modal-body">
-                <div style="overflow:scroll;">
-                    <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>OS</th>
-                            <th>Unidad</th>
-                            <th>Fecha de Solicitud</th>
-                            <th>Fecha Cerrrada</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tablaDetalle">
-                    </tbody>
-                    </table>
+        <div class="modal-dialog" style="max-width: 1000px;">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div style="overflow:scroll;">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>OS</th>
+                                    <th>Unidad</th>
+                                    <th>Fecha de Solicitud</th>
+                                    <th>Fecha Cerrrada</th>
+                                    <th>Informe Pendiente</th>
+                                    <th>Informe Resultado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaDetalle">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>    
             </div>
-            
             <!-- Modal footer -->
             <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>

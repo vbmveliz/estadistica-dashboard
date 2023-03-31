@@ -131,11 +131,11 @@ include 'header.php';
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <select class="form-control" id="OSEstado">
-                                    <option>Generado a solicitud de Preparación</option>
-                                    <option>Solicitud de preparación a recepción de Solicitud</option>
-                                    <option>Recepción de solicitud a preparación de Materiales</option>
-                                    <option>Preparación de Material a Entrega Cliente</option>
-                                    <option>Entrega Cliente a Finalizado</option>
+                                    <option>Generado</option>
+                                    <option>Solicitud de preparación de Material</option>
+                                    <option>Recepción de preparación del Material</option>
+                                    <option>Cliente recibé los Materiales</option>
+                                    <option>Finalizado / Atentido</option>
                                 </select>
                             </div>
                         </div>
@@ -174,6 +174,7 @@ include 'header.php';
                     <tbody id="tablaResumen">
                     </tbody>
                   </table>
+                  <div id="total"></div>
                 </div>
               </div>
             </div>

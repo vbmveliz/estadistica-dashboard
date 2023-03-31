@@ -160,7 +160,7 @@ $('#btnConsultarEstado').click(function(){
   function myGreeting1() {
     $('#sales-chart').append('<div class="spinner" id="spinner"></div>');
   }
-  const myTimeout2 = setTimeout(myGreeting2, 13000);
+  const myTimeout2 = setTimeout(myGreeting2, 150);
   function myGreeting2() {
       document.getElementById("spinner").classList.add('d-none');
   }
@@ -199,6 +199,7 @@ $('#btnConsultarEstado').click(function(){
       data: donutData,
       options: donutOptions
       })
+      let templatetotal = ''; 
       let template = '';
       let total = 0;
       data.forEach(datos => {
@@ -212,14 +213,48 @@ $('#btnConsultarEstado').click(function(){
       let porcentaje= Number(operacion.toFixed(2));
       template += `
               <tr class="porcentaje">
-                  <td>${valueEstadoOs}</td>
+                  <td>${datosSuma[2]}</td>
                   <td><button class="btn btn-outline-info" dia="${datosSuma[0]}" estado="${valueEstadoOs}"  onclick="mostrar(this)" data-toggle="modal" data-target="#myModal">${datosSuma[0]}</button></td>s
                   <td>${numero}</td>
                   <td>${porcentaje+" %"}</td>
               </tr>
               `
       });
+      templatetotal = `
+      <div class="row">
+        <div class="col-4"><h3>${"Total de Os: "+total}</h3></div>
+        <div class="col-4" id="iePendiente"></div>
+        <div class="col-4" id="ieResultado"></div>
+      </div>
+      `
       $('#tablaResumen').html(template);
+      $('#total').html(templatetotal);
+    }
+  })
+  $.ajax({
+    url : 'scripts/controlador_grafico_1_2_total.php',
+    type : 'POST',
+    data: {valueEstadoOs: valueEstadoOs}
+  }).done(function(respuesta){
+    if(respuesta == "error"){
+      alert("No se encontró registros.");
+    }else{
+      let totalPediente = 0;
+      let totalResultado = 0;
+      var h3Pendiente = "";
+      var h3Resultado = "";
+      var data = JSON.parse(respuesta);
+      data.forEach(datos => {
+        let numeroPendiente = Number(datos[1]);
+        let numeroResultado = Number(datos[2]);
+        totalPediente += numeroPendiente;
+        totalResultado += numeroResultado;
+        h3Pendiente = `<h3>${"Total de IE - Pendiente: "+totalPediente}</h3>`;
+        h3Resultado = `<h3>${"Total de IE - Resultado : "+totalResultado}</h3>`;
+      });
+      $('#iePendiente').html(h3Pendiente);
+      $('#ieResultado').html(h3Resultado);
+      
     }
   })
   return false;
@@ -263,10 +298,13 @@ $('#btnConsultarEstado').click(function(){
                     <td>${datos[1]}</td>s
                     <td>${datos[2]}</td>
                     <td>${datos[10]}</td>
+                    <td class="text-center">${datos[11]}</td>
+                    <td class="text-center">${datos[12]}</td>
                 </tr>
                 `
         });
         $('#tablaDetalle').html(template);
+        
       }
     })
   

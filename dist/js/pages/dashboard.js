@@ -214,7 +214,7 @@ $('#btnConsultarEstado').click(function(){
       template += `
               <tr class="porcentaje">
                   <td>${datosSuma[2]}</td>
-                  <td><button class="btn btn-outline-info" dia="${datosSuma[0]}" estado="${valueEstadoOs}"  onclick="mostrar(this)" data-toggle="modal" data-target="#myModal">${datosSuma[0]}</button></td>s
+                  <td><button class="btn btn-outline-info" dia="${datosSuma[0]}" estado="${valueEstadoOs}"  onclick="mostrar(this)" data-toggle="modal" data-target="#myModal">${datosSuma[0]}</button></td>
                   <td>${numero}</td>
                   <td>${porcentaje+" %"}</td>
               </tr>

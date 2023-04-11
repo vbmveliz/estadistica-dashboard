@@ -229,6 +229,37 @@
                 $this->conexion->cerrar();
             }
         }
+        function TraerDatosLinealDiaInforme($dia){
+            $sql = "select 
+            ccustodia_cab.oservicio,ncertificado,
+           tpedidos.fechactped  ,
+           if( ccustodia_cab.IDUNIDAD_n='0000000001','MAM',
+           if( ccustodia_cab.IDUNIDAD_n='0000000002','AGRO',
+           if( ccustodia_cab.IDUNIDAD_n='0000000003','ALI',
+           if( ccustodia_cab.IDUNIDAD_n='0000000004','GEO','')))) UNIDANEGOCIO ,
+           if (tpedidos.IdEstadOServ ='001' OR tpedidos.IdEstadOServ='017',1,0) enproceso , 
+           if (tpedidos.IdEstadOServ = '002'   ,1,0) Conresultado , 
+           if (tpedidos.IdEstadOServ = '013'   ,1,0) enviadocliente , 
+           DATEDIFF( now() , tpedidos.fechactped)     Dias_informe 
+            from 
+           Tpedidos
+           join ccustodia_cab on tpedidos.nro_cadena=ccustodia_cab.idcustodia
+           join t_orden_servicio oss on oss.idproforma = ccustodia_cab.idproforma 
+              WHERE 
+              oss.estado IN ('08') AND oss.idcliente <>'0000000372' AND 
+              fechactped >='2023-01-01' and fechactped<=Now() AND tpedidos.IdEstadOServ  IN ('001','002','013','017') 
+               AND DATEDIFF( now() , tpedidos.fechactped)='$dia'
+        
+             ORDER BY oservicio";
+            $arreglo = array();
+            if($consulta = $this -> conexion -> conexion -> query($sql)){
+                while ($consulta_VU = mysqli_fetch_array($consulta)){
+                    $arreglo[] = $consulta_VU;
+                }
+                return $arreglo;
+                $this->conexion->cerrar();
+            }
+        }
     }
 
 ?>

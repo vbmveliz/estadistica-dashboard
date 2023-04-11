@@ -21,7 +21,7 @@ include 'header.php';
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-7">
+                    <div class="col-md-8">
                         <div class="card card-primary">
                             <div class="card-header">
                                 <h3 class="card-title">Estado IE</h3>
@@ -59,14 +59,25 @@ include 'header.php';
                                         </div>
                                     </div>
                                     <div class="col-6 text-center">
-                                    <div class="text-white">
-                                        <div class="d-flex justify-content-center">
-                                        <input type="date" class="form-control" id="fechaFinal"
-                                        min="<?php echo $fecha;?>" max="<?php echo date("Y-m-d");?>">
+                                        <div class="text-white">
+                                            <div class="d-flex justify-content-center">
+                                            <input type="date" class="form-control" id="fechaFinal"
+                                            min="<?php echo $fecha;?>" max="<?php echo date("Y-m-d");?>">
+                                            </div>
                                         </div>
                                     </div>
+                                    <div class="col-6 text-center">
+                                        <div class="text-white">
+                                            <div class="form-group">
+                                                <select class="form-control" id="sel1">
+                                                    <option>Con Resultado</option>
+                                                    <option>En Proceso</option>
+                                                    <option>Enviado al Cliente</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-12 text-center">
+                                    <div class="col-6 text-center">
                                         <div class="text-white">
                                             <div class="d-flex justify-content-center">
                                                 <input type="submit" class="btn btn-info btn-block" id="btnConsultar" value="Consultar">
@@ -81,7 +92,7 @@ include 'header.php';
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <div class="card card-info">
                             <div class="card-header">
                                 <h3 class="card-title">Detalle</h3>
@@ -92,7 +103,7 @@ include 'header.php';
                                 </div>
                             </div>
                             <div class="card-body">
-                                <div class="chart" style="height: 610px; overflow:scroll;">
+                                <div class="chart" style="height: 645px; overflow:scroll;">
                                     <table class="table table-striped text-center">
                                         <thead>
                                             <tr>
@@ -127,44 +138,68 @@ include 'header.php';
 </div>
 <!-- The Modal -->
 <div class="modal" id="myModal">
-        <div class="modal-dialog" style="max-width: 1000px;">
-            <div class="modal-content">
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <div style="overflow:scroll;">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>OS</th>
-                                    <th>Días de Informe</th>
-                                    <th>Informe Enviado al Cliente</th>
-                                    <th>Informe Con Resultado</th>
-                                    <th>Informe En Proceso</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tablaDetalle">
-                            </tbody>
-                        </table>
-                        <div class="row">
-                            <div class="col-4" id="informeResultado"></div>
-                            <div class="col-4" id="informeProceso"></div>
-                            <div class="col-4" id="informeEnviado"></div>
-                        </div>
+    <div class="modal-dialog" style="max-width: 1000px;">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div style="overflow:scroll;">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>OS</th>
+                                <th>Días de Informe</th>
+                                <th>Informe Enviado al Cliente</th>
+                                <th>Informe Con Resultado</th>
+                                <th>Informe En Proceso</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaDetalle"></tbody>
+                    </table>
+                    <div class="row">
+                        <div class="col-4" id="informeResultado"></div>
+                        <div class="col-4" id="informeProceso"></div>
+                        <div class="col-4" id="informeEnviado"></div>
                     </div>
-                </div>    
-            </div>
-            <!-- Modal footer -->
-            <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            </div>
-            
-        </div>
+                </div>
+            </div>    
         </div>
     </div>
+</div>
+<div class="modal" id="myModal2">
+    <div class="modal-dialog" style="max-width: 1000px;">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div style="overflow:scroll;">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>OS</th>
+                                <th>Número de Informe</th>
+                                <th>Fecha</th>
+                                <th>Unidad de Negocio</th>
+                                <th>Informe Enviado al Cliente</th>
+                                <th>Informe Con Resultado</th>
+                                <th>Informe En Proceso</th>
+                                <th>Día</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaDetalleInforme"></tbody>
+                    </table>
+                </div>
+            </div>    
+        </div> 
+    </div>
+</div>
+</div>
 <!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
@@ -200,15 +235,15 @@ include 'header.php';
             const mixedChart = new Chart(ctx, {
             data: {
                 datasets: [{
-                    type: 'line',
+                    type: 'bar',
                     label: 'Con Resultado',
                     data: cantidadResultado
                 }, {
-                    type: 'line',
+                    type: 'bar',
                     label: 'En Proceso',
                     data: cantidadProceso,
                 }, {
-                    type: 'line',
+                    type: 'bar',
                     label: 'Enviado al cliente',
                     data: cantidadEnviClie,
                 }],
@@ -235,7 +270,7 @@ include 'header.php';
             totalEnviado += numeroEnviado;
             template += `
                     <tr>
-                        <td><button class="btn btn-outline-info" dia="${datos[0]}" onclick="mostrar(this)" data-toggle="modal" data-target="#myModal">${datos[0]}</button></td>
+                        <td><button class="btn btn-outline-info" dia="${datos[0]}" onclick="mostrar(this)" data-toggle="modal" data-target="#myModal2">${datos[0]}</button></td>
                         <td>${numeroEnviado}</td>
                         <td>${numeroResultado}</td>
                         <td>${numeroProceso}</td>
@@ -265,24 +300,30 @@ include 'header.php';
                 var titulo = [];
                 var cantidadResultado = [];
                 var cantidadProceso = [];
+                var cantidadEnviClie = [];
                 var data = JSON.parse(respuesta);
                 for(var i = 0; i < data.length; i++){
                     titulo.push(data[i][0]);
-                    cantidadResultado.push(data[i][1]);
-                    cantidadProceso.push(data[i][2]);
+                    cantidadEnviClie.push(data[i][1]);
+                    cantidadResultado.push(data[i][2]);
+                    cantidadProceso.push(data[i][3]);
                 }
                 const ctx = document.getElementById('line-chart');
                 const mixedChart = new Chart(ctx, {
                 data: {
                     datasets: [{
-                        type: 'line',
+                        type: 'bar',
                         label: 'Con Resultado',
                         data: cantidadResultado
                     }, {
-                        type: 'line',
+                        type: 'bar',
                         label: 'En Proceso',
                         data: cantidadProceso,
-                    }],
+                    }, {
+                    type: 'bar',
+                    label: 'Enviado al cliente',
+                    data: cantidadEnviClie,
+                }],
                     labels: titulo
                 },
                 options: {
@@ -294,26 +335,32 @@ include 'header.php';
                 }
             });
             let template = '';
-                let totalResultado = 0;
-                let totalProceso = 0;
-                data.forEach(datos => {
-                let numeroResultado = Number(datos[1]);
-                let numeroProceso = Number(datos[2]);
-                totalResultado += numeroResultado;
-                totalProceso += numeroProceso;
-                template += `
-                        <tr>
-                            <td><button class="btn btn-outline-info" dia="${datos[0]}" onclick="mostrar(this)" data-toggle="modal" data-target="#myModal">${datos[0]}</button></td>
-                            <td>${numeroResultado}</td>
-                            <td>${numeroProceso}</td>
-                        </tr>
-                        `
-                });
-                $('#tablaResumen').html(template);
-                let h3Resultado = `<h3>Total con Resultado: ${totalResultado}</h3>`;
-                let h3PRoceso = `<h3>Total con con Proceso: ${totalProceso}</h3>`;
-                $('#resultado').html(h3Resultado);
-                $('#proceso').html(h3PRoceso);
+            let totalResultado = 0;
+            let totalProceso = 0;
+            let totalEnviado = 0;
+            data.forEach(datos => {
+            let numeroResultado = Number(datos[2]);
+            let numeroProceso = Number(datos[3]);
+            let numeroEnviado = Number(datos[1]);
+            totalResultado += numeroResultado;
+            totalProceso += numeroProceso;
+            totalEnviado += numeroEnviado;
+            template += `
+                    <tr>
+                        <td><button class="btn btn-outline-info" dia="${datos[0]}" onclick="mostrar(this)" data-toggle="modal" data-target="#myModal2">${datos[0]}</button></td>
+                        <td>${numeroEnviado}</td>
+                        <td>${numeroResultado}</td>
+                        <td>${numeroProceso}</td>
+                    </tr>
+                    `
+            });
+            $('#tablaResumen').html(template);
+            let h3Resultado = `<h4>Total con Resultado: ${totalResultado}</h4>`;
+            let h3PRoceso = `<h4>Total con Proceso: ${totalProceso}</h4>`;
+            let h3Enviado = `<h4>Total Enviados: ${totalEnviado}</h4>`;
+            $('#resultado').html(h3Resultado);
+            $('#proceso').html(h3PRoceso);
+            $('#enviado').html(h3Enviado);
 
             })
             return false;
@@ -321,11 +368,11 @@ include 'header.php';
         function mostrar(btn){
             let dia = $(btn).attr("dia");
             $.ajax({
-            url : 'scripts/controlador_lineal_dia.php',
+            url : 'scripts/controlador_lineal_dia_informe.php',
             type : 'POST',
             data: {dia: dia}
             }).done(function(resp){
-            if(resp == "error"){
+                if(resp == "error"){
                 alert("No se encontró registros.");
             }else{
                 let template = '';
@@ -341,22 +388,13 @@ include 'header.php';
                                 <td>${datos[2]}</td>s
                                 <td>${datos[3]}</td>
                                 <td>${datos[4]}</td>
+                                <td>${datos[5]}</td>
+                                <td>${datos[6]}</td>
+                                <td>${datos[7]}</td>
                             </tr>
                             `
-                    let numeroResultado = Number(datos[2]);
-                    let numeroProceso = Number(datos[3]);
-                    let numeroEnviado = Number(datos[4]);
-                    informeResultado += numeroResultado;
-                    informeProceso += numeroProceso;
-                    informeEnviado += numeroEnviado;
                 });
-                let informeH3Resultado = `<h4>Total con Resultado: ${informeResultado}</h4>`;
-                let informeH3Proceso = `<h4>Total con Proceso: ${informeProceso}</h4>`;
-                let informeH3Enviado = `<h4>Total con Enviado: ${informeEnviado}</h4>`;
-                $('#tablaDetalle').html(template);
-                $('#informeResultado').html(informeH3Resultado);
-                $('#informeProceso').html(informeH3Proceso);
-                $('#informeEnviado').html(informeH3Enviado);
+                $('#tablaDetalleInforme').html(template);
                 
             }
             })

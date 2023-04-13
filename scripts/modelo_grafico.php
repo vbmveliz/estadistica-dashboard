@@ -150,7 +150,7 @@
                 $this->conexion->cerrar();
             }
         }
-        function TraerDatosLinealFecha($fechaInicio, $fechaFinal){
+        function TraerDatosLinealFecha($fechaInicio, $fechaFinal, $valueUnidad){
             $sql = "SELECT  dias_informe ,  SUM(informe_enviadocliente) Enviadocli , SUM(informe_conresultado) ConResultado , 
             SUM(informe_enproceso) EnProceso
              From
@@ -177,7 +177,7 @@
                     join t_orden_servicio oss on oss.idproforma = ccustodia_cab.idproforma 
                        WHERE 
                        oss.estado IN ('08') AND oss.idcliente <>'0000000372' AND 
-                    fechactped >='$fechaInicio' and fechactped<='$fechaFinal' AND tpedidos.IdEstadOServ  IN ('001','002','013','017')   ORDER BY oservicio
+                    fechactped >='$fechaInicio' and fechactped<='$fechaFinal' AND tpedidos.IdEstadOServ  IN ('001','002','013','017') AND ccustodia_cab.IDUNIDAD_n LIKE  '$valueUnidad'   ORDER BY oservicio
                     ) AS aaaa
                     GROUP BY  oservicio, dias_informe ORDER BY  dias_informe
             )  AS listado 

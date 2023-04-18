@@ -33,9 +33,10 @@ include 'header.php';
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-4" id="resultado"></div>
-                                    <div class="col-4" id="proceso"></div>
-                                    <div class="col-4" id="enviado"></div>
+                                    <div class="col-3" id="total"></div>
+                                    <div class="col-3" id="resultado"></div>
+                                    <div class="col-3" id="proceso"></div>
+                                    <div class="col-3" id="enviado"></div>
                                 </div>
                                 <div class="chart" id="graficoEstado"></div>
                             </div>
@@ -58,45 +59,50 @@ include 'header.php';
                                             <h6 class="text-center">Medio Ambiente</h6>
                                             <div id="medioAmbiente"></div>
                                             <div class="row">
-                                                <div class="col-4" id="medioAmbienteResultado"></div>
-                                                <div class="col-4" id="medioAmbienteProceso"></div>
-                                                <div class="col-4" id="medioAmbienteEnviado"></div>
+                                                <div class="col-3" id="medioAmbienteTotal"></div>
+                                                <div class="col-3" id="medioAmbienteResultado"></div>
+                                                <div class="col-3" id="medioAmbienteProceso"></div>
+                                                <div class="col-3" id="medioAmbienteEnviado"></div>
                                             </div>
                                         </div>
                                         <div class="col-6 ">
                                             <h6 class="text-center">Agronomía</h6>
                                             <div id="agronomia"></div>
                                             <div class="row">
-                                                <div class="col-4" id="agronomiaResultado"></div>
-                                                <div class="col-4" id="agronomiaProceso"></div>
-                                                <div class="col-4" id="agronomiaEnviado"></div>
+                                                <div class="col-3" id="agronomiaTotal"></div>
+                                                <div class="col-3" id="agronomiaResultado"></div>
+                                                <div class="col-3" id="agronomiaProceso"></div>
+                                                <div class="col-3" id="agronomiaEnviado"></div>
                                             </div>
                                         </div>       
                                         <div class="col-6 ">
                                             <h6 class="text-center">Alimentos</h6>
                                             <div id="alimentos"></div>
                                             <div class="row">
-                                                <div class="col-4" id="alimentosResultado"></div>
-                                                <div class="col-4" id="alimentosProceso"></div>
-                                                <div class="col-4" id="alimentosEnviado"></div>
+                                                <div class="col-3" id="alimentosTotal"></div>
+                                                <div class="col-3" id="alimentosResultado"></div>
+                                                <div class="col-3" id="alimentosProceso"></div>
+                                                <div class="col-3" id="alimentosEnviado"></div>
                                             </div>
                                         </div>            
                                         <div class="col-6 ">
                                             <h6 class="text-center">Geoquímica</h6>
                                             <div id="geoquimica"></div>
                                             <div class="row">
-                                                <div class="col-4" id="geoquimicaResultado"></div>
-                                                <div class="col-4" id="geoquimicaProceso"></div>
-                                                <div class="col-4" id="geoquimicaEnviado"></div>
+                                                <div class="col-3" id="geoquimicaTotal"></div>
+                                                <div class="col-3" id="geoquimicaResultado"></div>
+                                                <div class="col-3" id="geoquimicaProceso"></div>
+                                                <div class="col-3" id="geoquimicaEnviado"></div>
                                             </div>
                                         </div>              
                                         <div class="col-6 ">
                                             <h6 class="text-center">Calibraciones</h6>
                                             <div id="calibracion"></div>
                                             <div class="row">
-                                                <div class="col-4" id="calibracionResultado"></div>
-                                                <div class="col-4" id="calibracionProceso"></div>
-                                                <div class="col-4" id="calibracionEnviado"></div>
+                                                <div class="col-3" id="calibracionTotal"></div>
+                                                <div class="col-3" id="calibracionResultado"></div>
+                                                <div class="col-3" id="calibracionProceso"></div>
+                                                <div class="col-3" id="calibracionEnviado"></div>
                                             </div>
                                         </div>
                                     </div> 
@@ -176,9 +182,11 @@ include 'header.php';
                     }
                 }
             });
-            let h3Resultado = `<h6 class="nav-link" style="color: rgb(0, 0, 255);">Total con Resultado: ${totalResultado}</h6><h6 class="nav-link" style="color: rgb(0, 0, 255);">Total con Resultado (%): ${porcentajeTotalResultado} %</h6>`;
-            let h3PRoceso = `<h6 class="nav-link" style="color: rgb(255, 0, 19);">Total con Proceso: ${totalProceso}</h6><h6 class="nav-link" style="color: rgb(255, 0, 19);">Total con Proceso (%): ${porcentajeTotalProceso} %</h6>`;
-            let h3Enviado = `<h6 class="nav-link" style="color: rgb(38, 195, 54);">Total Enviados: ${totalEnviado}</h6><h6 class="nav-link" style="color: rgb(38, 195, 54)">Total Enviados (%): ${porcentajeTotalEnviado} %</h6>`;
+            let h3Total = `<h6 class="nav-link p-1">Total de Informes: <br>${totalIE} -- 100 %</h6>`;
+            let h3Resultado = `<h6 class="nav-link p-1" style="color: rgb(0, 0, 255);">Total con Resultado: <br>${totalResultado} -- ${porcentajeTotalResultado} %</h6>`;
+            let h3PRoceso = `<h6 class="nav-link p-1" style="color: rgb(255, 0, 19);">Total con Proceso: <br>${totalProceso} -- ${porcentajeTotalProceso} %</h6>`;
+            let h3Enviado = `<h6 class="nav-link p-1" style="color: rgb(38, 195, 54);">Total Enviados al Cliente: <br>${totalEnviado} -- ${porcentajeTotalEnviado} %</h6>`;
+            $('#total').html(h3Total);
             $('#resultado').html(h3Resultado);
             $('#proceso').html(h3PRoceso);
             $('#enviado').html(h3Enviado);
@@ -242,9 +250,11 @@ include 'header.php';
                     }
                 }
             });
-            let medioAmbienteResultado = `<span class="nav-link" style="color: rgb(0, 0, 255);">Result: ${totalResultado}</span><span class="nav-link" style="color: rgb(0, 0, 255);">Result : ${porcentajeTotalResultado} %</span>`;
-            let medioAmbienteProceso = `<span class="nav-link" style="color: rgb(255, 0, 19);">Proc: ${totalProceso}</span><span class="nav-link" style="color: rgb(255, 0, 19);">Proc: ${porcentajeTotalProceso} %</span>`;
-            let medioAmbienteEnviado = `<span class="nav-link" style="color: rgb(38, 195, 54);">Envi: ${totalEnviado}</span><span class="nav-link" style="color: rgb(38, 195, 54)">Envi: ${porcentajeTotalEnviado} %</span>`;
+            let medioAmbienteTotal = `<span class="nav-link p-1" style=" font-size: 10px;">Total: <br>${totalIE} -- 100 %</span>`;
+            let medioAmbienteResultado = `<span class="nav-link p-1" style="color: rgb(0, 0, 255); font-size: 10px;">Resultado: <br>${totalResultado} -- ${porcentajeTotalResultado} %</span>`;
+            let medioAmbienteProceso = `<span class="nav-link p-1" style="color: rgb(255, 0, 19); font-size: 10px;">En Proceso: <br>${totalProceso} -- ${porcentajeTotalProceso} %</span>`;
+            let medioAmbienteEnviado = `<span class="nav-link p-1" style="color: rgb(38, 195, 54); font-size: 10px;">Enviado Clie: <br>${totalEnviado} -- ${porcentajeTotalEnviado} %</span>`;
+            $('#medioAmbienteTotal').html(medioAmbienteTotal);
             $('#medioAmbienteResultado').html(medioAmbienteResultado);
             $('#medioAmbienteProceso').html(medioAmbienteProceso);
             $('#medioAmbienteEnviado').html(medioAmbienteEnviado);
@@ -303,9 +313,11 @@ include 'header.php';
                     }
                 }
             });
-            let agronomiaResultado = `<span class="nav-link" style="color: rgb(0, 0, 255);">Result: ${totalResultado}</span><span class="nav-link" style="color: rgb(0, 0, 255);">Result : ${porcentajeTotalResultado} %</span>`;
-            let agronomiaProceso = `<span class="nav-link" style="color: rgb(255, 0, 19);">Proc: ${totalProceso}</span><span class="nav-link" style="color: rgb(255, 0, 19);">Proc: ${porcentajeTotalProceso} %</span>`;
-            let agronomiaEnviado = `<span class="nav-link" style="color: rgb(38, 195, 54);">Envi: ${totalEnviado}</span><span class="nav-link" style="color: rgb(38, 195, 54)">Envi: ${porcentajeTotalEnviado} %</span>`;
+            let agronomiaTotal = `<span class="nav-link p-1" style=" font-size: 10px;">Total: <br>${totalIE} -- 100 %</span>`;
+            let agronomiaResultado = `<span class="nav-link p-1" style="color: rgb(0, 0, 255); font-size: 10px;">Resultado: <br>${totalResultado} -- ${porcentajeTotalResultado} %</span>`;
+            let agronomiaProceso = `<span class="nav-link p-1" style="color: rgb(255, 0, 19); font-size: 10px;">En Proceso: <br>${totalProceso} -- ${porcentajeTotalProceso} %</span>`;
+            let agronomiaEnviado = `<span class="nav-link p-1" style="color: rgb(38, 195, 54); font-size: 10px;">Enviado Clie: <br>${totalEnviado} -- ${porcentajeTotalEnviado} %</span>`;
+            $('#agronomiaTotal').html(agronomiaTotal);
             $('#agronomiaResultado').html(agronomiaResultado);
             $('#agronomiaProceso').html(agronomiaProceso);
             $('#agronomiaEnviado').html(agronomiaEnviado);
@@ -364,9 +376,11 @@ include 'header.php';
                     }
                 }
             });
-            let alimentosResultado = `<span class="nav-link" style="color: rgb(0, 0, 255);">Result: ${totalResultado}</span><span class="nav-link" style="color: rgb(0, 0, 255);">Result : ${porcentajeTotalResultado} %</span>`;
-            let alimentosProceso = `<span class="nav-link" style="color: rgb(255, 0, 19);">Proc: ${totalProceso}</span><span class="nav-link" style="color: rgb(255, 0, 19);">Proc: ${porcentajeTotalProceso} %</span>`;
-            let alimentosEnviado = `<span class="nav-link" style="color: rgb(38, 195, 54);">Envi: ${totalEnviado}</span><span class="nav-link" style="color: rgb(38, 195, 54)">Envi: ${porcentajeTotalEnviado} %</span>`;
+            let alimentosTotal = `<span class="nav-link p-1" style=" font-size: 10px;">Total: <br>${totalIE} -- 100 %</span>`;
+            let alimentosResultado = `<span class="nav-link p-1" style="color: rgb(0, 0, 255); font-size: 10px;">Resultado: <br>${totalResultado} -- ${porcentajeTotalResultado} %</span>`;
+            let alimentosProceso = `<span class="nav-link p-1" style="color: rgb(255, 0, 19); font-size: 10px;">En Proceso: <br>${totalProceso} -- ${porcentajeTotalProceso} %</span>`;
+            let alimentosEnviado = `<span class="nav-link p-1" style="color: rgb(38, 195, 54); font-size: 10px;">Enviado Clie: <br>${totalEnviado} -- ${porcentajeTotalEnviado} %</span>`;
+            $('#alimentosTotal').html(alimentosTotal);
             $('#alimentosResultado').html(alimentosResultado);
             $('#alimentosProceso').html(alimentosProceso);
             $('#alimentosEnviado').html(alimentosEnviado);
@@ -425,9 +439,11 @@ include 'header.php';
                     }
                 }
             });
-            let geoquimicaResultado = `<span class="nav-link" style="color: rgb(0, 0, 255);">Result: ${totalResultado}</span><span class="nav-link" style="color: rgb(0, 0, 255);">Result : ${porcentajeTotalResultado} %</span>`;
-            let geoquimicaProceso = `<span class="nav-link" style="color: rgb(255, 0, 19);">Proc: ${totalProceso}</span><span class="nav-link" style="color: rgb(255, 0, 19);">Proc: ${porcentajeTotalProceso} %</span>`;
-            let geoquimicaEnviado = `<span class="nav-link" style="color: rgb(38, 195, 54);">Envi: ${totalEnviado}</span><span class="nav-link" style="color: rgb(38, 195, 54)">Envi: ${porcentajeTotalEnviado} %</span>`;
+            let geoquimicaTotal = `<span class="nav-link p-1" style=" font-size: 10px;">Total: <br>${totalIE} -- 100 %</span>`;
+            let geoquimicaResultado = `<span class="nav-link p-1" style="color: rgb(0, 0, 255); font-size: 10px;">Resultado: <br>${totalResultado} -- ${porcentajeTotalResultado} %</span>`;
+            let geoquimicaProceso = `<span class="nav-link p-1" style="color: rgb(255, 0, 19); font-size: 10px;">En Proceso: <br>${totalProceso} -- ${porcentajeTotalProceso} %</span>`;
+            let geoquimicaEnviado = `<span class="nav-link p-1" style="color: rgb(38, 195, 54); font-size: 10px;">Enviado Clie: <br>${totalEnviado} -- ${porcentajeTotalEnviado} %</span>`;
+            $('#geoquimicaTotal').html(geoquimicaTotal);
             $('#geoquimicaResultado').html(geoquimicaResultado);
             $('#geoquimicaProceso').html(geoquimicaProceso);
             $('#geoquimicaEnviado').html(geoquimicaEnviado);
@@ -486,14 +502,18 @@ include 'header.php';
                     }
                 }
             });
-            let calibracionResultado = `<span class="nav-link" style="color: rgb(0, 0, 255);">Result: ${totalResultado}</span><span class="nav-link" style="color: rgb(0, 0, 255);">Result : ${porcentajeTotalResultado} %</span>`;
-            let calibracionProceso = `<span class="nav-link" style="color: rgb(255, 0, 19);">Proc: ${totalProceso}</span><span class="nav-link" style="color: rgb(255, 0, 19);">Proc: ${porcentajeTotalProceso} %</span>`;
-            let calibracionEnviado = `<span class="nav-link" style="color: rgb(38, 195, 54);">Envi: ${totalEnviado}</span><span class="nav-link" style="color: rgb(38, 195, 54)">Envi: ${porcentajeTotalEnviado} %</span>`;
+            let calibracionTotal = `<span class="nav-link p-1" style=" font-size: 10px;">Total: <br>${totalIE} -- 100 %</span>`;
+            let calibracionResultado = `<span class="nav-link p-1" style="color: rgb(0, 0, 255); font-size: 10px;">Resultado: <br>${totalResultado} -- ${porcentajeTotalResultado} %</span>`;
+            let calibracionProceso = `<span class="nav-link p-1" style="color: rgb(255, 0, 19); font-size: 10px;">En Proceso: <br>${totalProceso} -- ${porcentajeTotalProceso} %</span>`;
+            let calibracionEnviado = `<span class="nav-link p-1" style="color: rgb(38, 195, 54); font-size: 10px;">Enviado Clie: <br>${totalEnviado} -- ${porcentajeTotalEnviado} %</span>`;
+            $('#calibracionTotal').html(calibracionTotal);
             $('#calibracionResultado').html(calibracionResultado);
             $('#calibracionProceso').html(calibracionProceso);
             $('#calibracionEnviado').html(calibracionEnviado);
         })
     }
+
+
     $('#btnConsultar').click(function(){
         $('#graficoEstado').empty();
         $('#graficoEstado').append('<canvas id="line-chart" style="min-height: 555px; height: 555px; max-height: 555px; max-width: 100%;"></canvas>');

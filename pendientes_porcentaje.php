@@ -21,7 +21,7 @@ include 'header.php';
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <div class="card card-primary">
                             <div class="card-header">
                                 <h3 class="card-title">Estado IE General</h3>
@@ -41,7 +41,7 @@ include 'header.php';
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-7">
                         <div class="card card-info">
                             <div class="card-header">
                                 <h3 class="card-title">Estado IE Unidad de Negocio</h3>
@@ -52,13 +52,55 @@ include 'header.php';
                                 </div>
                             </div>
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="col-6"id="medioAmbiente"></div>
-                                    <div class="col-6" id="agronomia"></div>       
-                                    <div class="col-6" id="alimentos"></div>            
-                                    <div class="col-6" id="geoquimica"></div>              
-                                    <div class="col-6" id="calibracion"></div>
-                                </div>                                                    
+                                <div style="overflow:scroll;">
+                                    <div class="row">
+                                        <div class="col-6 ">
+                                            <h6 class="text-center">Medio Ambiente</h6>
+                                            <div id="medioAmbiente"></div>
+                                            <div class="row">
+                                                <div class="col-4" id="medioAmbienteResultado"></div>
+                                                <div class="col-4" id="medioAmbienteProceso"></div>
+                                                <div class="col-4" id="medioAmbienteEnviado"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 ">
+                                            <h6 class="text-center">Agronomía</h6>
+                                            <div id="agronomia"></div>
+                                            <div class="row">
+                                                <div class="col-4" id="agronomiaResultado"></div>
+                                                <div class="col-4" id="agronomiaProceso"></div>
+                                                <div class="col-4" id="agronomiaEnviado"></div>
+                                            </div>
+                                        </div>       
+                                        <div class="col-6 ">
+                                            <h6 class="text-center">Alimentos</h6>
+                                            <div id="alimentos"></div>
+                                            <div class="row">
+                                                <div class="col-4" id="alimentosResultado"></div>
+                                                <div class="col-4" id="alimentosProceso"></div>
+                                                <div class="col-4" id="alimentosEnviado"></div>
+                                            </div>
+                                        </div>            
+                                        <div class="col-6 ">
+                                            <h6 class="text-center">Geoquímica</h6>
+                                            <div id="geoquimica"></div>
+                                            <div class="row">
+                                                <div class="col-4" id="geoquimicaResultado"></div>
+                                                <div class="col-4" id="geoquimicaProceso"></div>
+                                                <div class="col-4" id="geoquimicaEnviado"></div>
+                                            </div>
+                                        </div>              
+                                        <div class="col-6 ">
+                                            <h6 class="text-center">Calibraciones</h6>
+                                            <div id="calibracion"></div>
+                                            <div class="row">
+                                                <div class="col-4" id="calibracionResultado"></div>
+                                                <div class="col-4" id="calibracionProceso"></div>
+                                                <div class="col-4" id="calibracionEnviado"></div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                </div>                                                   
                             </div>   
                         </div>                  
                     </div>          
@@ -149,7 +191,7 @@ include 'header.php';
     });
     function graficoMedioAmbiente(){
         $('#medioAmbiente').empty();
-        $('#medioAmbiente').append('<canvas id="grafico_MedioAmbiente"  style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>');
+        $('#medioAmbiente').append('<canvas id="grafico_MedioAmbiente"  style="min-height: 250px; height: 250px; max-height: 250px; width: 100%;"></canvas>');
         $.ajax({
             url:'scripts/controlador_lineal_medio_ambiente.php',
             type: 'POST'
@@ -176,6 +218,12 @@ include 'header.php';
 
             var operacionEnviado = (totalEnviado*100)/totalIE;
             let porcentajeTotalEnviado= Number(operacionEnviado.toFixed(2));
+
+            if(totalIE == 0){
+                porcentajeTotalResultado = "0";
+                porcentajeTotalProceso = "0";
+                porcentajeTotalEnviado = "0";
+            }
             const ctx = document.getElementById('grafico_MedioAmbiente');
             new Chart(ctx, {
                 type: 'pie',
@@ -194,6 +242,12 @@ include 'header.php';
                     }
                 }
             });
+            let medioAmbienteResultado = `<span class="nav-link" style="color: rgb(0, 0, 255);">Result: ${totalResultado}</span><span class="nav-link" style="color: rgb(0, 0, 255);">Result : ${porcentajeTotalResultado} %</span>`;
+            let medioAmbienteProceso = `<span class="nav-link" style="color: rgb(255, 0, 19);">Proc: ${totalProceso}</span><span class="nav-link" style="color: rgb(255, 0, 19);">Proc: ${porcentajeTotalProceso} %</span>`;
+            let medioAmbienteEnviado = `<span class="nav-link" style="color: rgb(38, 195, 54);">Envi: ${totalEnviado}</span><span class="nav-link" style="color: rgb(38, 195, 54)">Envi: ${porcentajeTotalEnviado} %</span>`;
+            $('#medioAmbienteResultado').html(medioAmbienteResultado);
+            $('#medioAmbienteProceso').html(medioAmbienteProceso);
+            $('#medioAmbienteEnviado').html(medioAmbienteEnviado);
         })
     }
     function graficoAgronomia(){
@@ -225,6 +279,12 @@ include 'header.php';
 
             var operacionEnviado = (totalEnviado*100)/totalIE;
             let porcentajeTotalEnviado= Number(operacionEnviado.toFixed(2));
+
+            if(totalIE == 0){
+                porcentajeTotalResultado = "0";
+                porcentajeTotalProceso = "0";
+                porcentajeTotalEnviado = "0";
+            }
             const ctx = document.getElementById('grafico_Agronomia');
             new Chart(ctx, {
                 type: 'pie',
@@ -243,6 +303,12 @@ include 'header.php';
                     }
                 }
             });
+            let agronomiaResultado = `<span class="nav-link" style="color: rgb(0, 0, 255);">Result: ${totalResultado}</span><span class="nav-link" style="color: rgb(0, 0, 255);">Result : ${porcentajeTotalResultado} %</span>`;
+            let agronomiaProceso = `<span class="nav-link" style="color: rgb(255, 0, 19);">Proc: ${totalProceso}</span><span class="nav-link" style="color: rgb(255, 0, 19);">Proc: ${porcentajeTotalProceso} %</span>`;
+            let agronomiaEnviado = `<span class="nav-link" style="color: rgb(38, 195, 54);">Envi: ${totalEnviado}</span><span class="nav-link" style="color: rgb(38, 195, 54)">Envi: ${porcentajeTotalEnviado} %</span>`;
+            $('#agronomiaResultado').html(agronomiaResultado);
+            $('#agronomiaProceso').html(agronomiaProceso);
+            $('#agronomiaEnviado').html(agronomiaEnviado);
         })
     }
     function graficoAlimentos(){
@@ -274,6 +340,12 @@ include 'header.php';
 
             var operacionEnviado = (totalEnviado*100)/totalIE;
             let porcentajeTotalEnviado= Number(operacionEnviado.toFixed(2));
+
+            if(totalIE == 0){
+                porcentajeTotalResultado = "0";
+                porcentajeTotalProceso = "0";
+                porcentajeTotalEnviado = "0";
+            }
             const ctx = document.getElementById('grafico_Alimentos');
             new Chart(ctx, {
                 type: 'pie',
@@ -292,6 +364,12 @@ include 'header.php';
                     }
                 }
             });
+            let alimentosResultado = `<span class="nav-link" style="color: rgb(0, 0, 255);">Result: ${totalResultado}</span><span class="nav-link" style="color: rgb(0, 0, 255);">Result : ${porcentajeTotalResultado} %</span>`;
+            let alimentosProceso = `<span class="nav-link" style="color: rgb(255, 0, 19);">Proc: ${totalProceso}</span><span class="nav-link" style="color: rgb(255, 0, 19);">Proc: ${porcentajeTotalProceso} %</span>`;
+            let alimentosEnviado = `<span class="nav-link" style="color: rgb(38, 195, 54);">Envi: ${totalEnviado}</span><span class="nav-link" style="color: rgb(38, 195, 54)">Envi: ${porcentajeTotalEnviado} %</span>`;
+            $('#alimentosResultado').html(alimentosResultado);
+            $('#alimentosProceso').html(alimentosProceso);
+            $('#alimentosEnviado').html(alimentosEnviado);
         })
     }
     function graficoGeoquimico(){
@@ -323,6 +401,12 @@ include 'header.php';
 
             var operacionEnviado = (totalEnviado*100)/totalIE;
             let porcentajeTotalEnviado= Number(operacionEnviado.toFixed(2));
+
+            if(totalIE == 0){
+                porcentajeTotalResultado = "0";
+                porcentajeTotalProceso = "0";
+                porcentajeTotalEnviado = "0";
+            }
             const ctx = document.getElementById('grafico_Geoquimica');
             new Chart(ctx, {
                 type: 'pie',
@@ -341,6 +425,12 @@ include 'header.php';
                     }
                 }
             });
+            let geoquimicaResultado = `<span class="nav-link" style="color: rgb(0, 0, 255);">Result: ${totalResultado}</span><span class="nav-link" style="color: rgb(0, 0, 255);">Result : ${porcentajeTotalResultado} %</span>`;
+            let geoquimicaProceso = `<span class="nav-link" style="color: rgb(255, 0, 19);">Proc: ${totalProceso}</span><span class="nav-link" style="color: rgb(255, 0, 19);">Proc: ${porcentajeTotalProceso} %</span>`;
+            let geoquimicaEnviado = `<span class="nav-link" style="color: rgb(38, 195, 54);">Envi: ${totalEnviado}</span><span class="nav-link" style="color: rgb(38, 195, 54)">Envi: ${porcentajeTotalEnviado} %</span>`;
+            $('#geoquimicaResultado').html(geoquimicaResultado);
+            $('#geoquimicaProceso').html(geoquimicaProceso);
+            $('#geoquimicaEnviado').html(geoquimicaEnviado);
         })
     }
     function graficoCalibracion(){
@@ -372,6 +462,12 @@ include 'header.php';
 
             var operacionEnviado = (totalEnviado*100)/totalIE;
             let porcentajeTotalEnviado= Number(operacionEnviado.toFixed(2));
+
+            if(totalIE == 0){
+                porcentajeTotalResultado = "0";
+                porcentajeTotalProceso = "0";
+                porcentajeTotalEnviado = "0";
+            }
             const ctx = document.getElementById('grafico_Calibracion');
             new Chart(ctx, {
                 type: 'pie',
@@ -390,6 +486,12 @@ include 'header.php';
                     }
                 }
             });
+            let calibracionResultado = `<span class="nav-link" style="color: rgb(0, 0, 255);">Result: ${totalResultado}</span><span class="nav-link" style="color: rgb(0, 0, 255);">Result : ${porcentajeTotalResultado} %</span>`;
+            let calibracionProceso = `<span class="nav-link" style="color: rgb(255, 0, 19);">Proc: ${totalProceso}</span><span class="nav-link" style="color: rgb(255, 0, 19);">Proc: ${porcentajeTotalProceso} %</span>`;
+            let calibracionEnviado = `<span class="nav-link" style="color: rgb(38, 195, 54);">Envi: ${totalEnviado}</span><span class="nav-link" style="color: rgb(38, 195, 54)">Envi: ${porcentajeTotalEnviado} %</span>`;
+            $('#calibracionResultado').html(calibracionResultado);
+            $('#calibracionProceso').html(calibracionProceso);
+            $('#calibracionEnviado').html(calibracionEnviado);
         })
     }
     $('#btnConsultar').click(function(){

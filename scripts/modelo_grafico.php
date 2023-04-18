@@ -240,17 +240,237 @@
            if (tpedidos.IdEstadOServ ='001' OR tpedidos.IdEstadOServ='017',1,0) enproceso , 
            if (tpedidos.IdEstadOServ = '002'   ,1,0) Conresultado , 
            if (tpedidos.IdEstadOServ = '013'   ,1,0) enviadocliente , 
-           DATEDIFF( now() , tpedidos.fechactped)     Dias_informe 
+           DATEDIFF( now() , tpedidos.fechactped)     Dias_informe ,
+           if(tclientes.MOROSO='1','Bloqueo de cuenta ' ,'') estadocliente , 
+			  fTecnicas_pendiente_uninforme(tpedidos.idpedidos) tecnicaspendientes,
+			  Fareas_uninforme(tpedidos.idpedidos)   laboratoriopendiente  
             from 
            Tpedidos
            join ccustodia_cab on tpedidos.nro_cadena=ccustodia_cab.idcustodia
            join t_orden_servicio oss on oss.idproforma = ccustodia_cab.idproforma 
+           JOIN tclientes ON tclientes.CodClte = ccustodia_cab.cod_clte 
               WHERE 
               oss.estado IN ('08') AND oss.idcliente <>'0000000372' AND 
-              fechactped >='2023-01-01' and fechactped<=Now() AND tpedidos.IdEstadOServ  IN ('001','002','013','017') 
-               AND DATEDIFF( now() , tpedidos.fechactped)='$dia'
-        
+              fechactped >='2023-01-01' and fechactped<=Now() AND tpedidos.IdEstadOServ  IN ('001','002','013','017')
+				  AND DATEDIFF( now() , tpedidos.fechactped)='$dia' 
+         
              ORDER BY oservicio";
+            $arreglo = array();
+            if($consulta = $this -> conexion -> conexion -> query($sql)){
+                while ($consulta_VU = mysqli_fetch_array($consulta)){
+                    $arreglo[] = $consulta_VU;
+                }
+                return $arreglo;
+                $this->conexion->cerrar();
+            }
+        }
+        function TraerDatosLinealDiaInformeFiltros($dia,$tecnica,$laboratorio){
+            $sql = "CALL Estadistica_web_01_ordenservicioinformes('%$tecnica%', '%$laboratorio%','$dia')";
+            $arreglo = array();
+            if($consulta = $this -> conexion -> conexion -> query($sql)){
+                while ($consulta_VU = mysqli_fetch_array($consulta)){
+                    $arreglo[] = $consulta_VU;
+                }
+                return $arreglo;
+                $this->conexion->cerrar();
+            }
+        }
+        function TraerDatosLinealMedioAmbiente(){
+            $sql = "SELECT  dias_informe ,  SUM(informe_enviadocliente) Enviadocli , SUM(informe_conresultado) ConResultado , 
+            SUM(informe_enproceso) EnProceso
+             From
+             (
+                    SELECT oservicio ,   dias_informe, SUM(Conresultado) informe_conresultado , SUM(enproceso) informe_enproceso
+                    , SUM(enviadocliente) informe_enviadocliente
+                    FROM 
+                    (
+                    select 
+                     ccustodia_cab.oservicio,ncertificado,
+                    tpedidos.fechactped  ,
+                    if( ccustodia_cab.IDUNIDAD_n='0000000001','MAM',
+                    if( ccustodia_cab.IDUNIDAD_n='0000000002','AGRO',
+                    if( ccustodia_cab.IDUNIDAD_n='0000000003','ALI',
+                    if( ccustodia_cab.IDUNIDAD_n='0000000004','GEO','')))) UNIDANEGOCIO ,
+                    if (tpedidos.IdEstadOServ ='001' OR tpedidos.IdEstadOServ='017',1,0) enproceso , 
+                    if (tpedidos.IdEstadOServ = '002'   ,1,0) Conresultado , 
+                    if (tpedidos.IdEstadOServ = '013'   ,1,0) enviadocliente , 
+                    DATEDIFF( now() , tpedidos.fechactped)     Dias_informe 
+                    
+                    from 
+                    Tpedidos
+                    join ccustodia_cab on tpedidos.nro_cadena=ccustodia_cab.idcustodia
+                    join t_orden_servicio oss on oss.idproforma = ccustodia_cab.idproforma 
+                       WHERE 
+                       oss.estado IN ('08') AND oss.idcliente <>'0000000372' AND 
+                    fechactped >='2023-01-01' and fechactped<=NOW() AND tpedidos.IdEstadOServ  IN ('001','002','013','017') AND ccustodia_cab.IDUNIDAD_n LIKE  '0000000001'   ORDER BY oservicio
+                    ) AS aaaa
+                    GROUP BY  oservicio, dias_informe ORDER BY  dias_informe
+            )  AS listado 
+            Group by dias_informe";
+            $arreglo = array();
+            if($consulta = $this -> conexion -> conexion -> query($sql)){
+                while ($consulta_VU = mysqli_fetch_array($consulta)){
+                    $arreglo[] = $consulta_VU;
+                }
+                return $arreglo;
+                $this->conexion->cerrar();
+            }
+        }
+        function TraerDatosLinealAgronomia(){
+            $sql = "SELECT  dias_informe ,  SUM(informe_enviadocliente) Enviadocli , SUM(informe_conresultado) ConResultado , 
+            SUM(informe_enproceso) EnProceso
+             From
+             (
+                    SELECT oservicio ,   dias_informe, SUM(Conresultado) informe_conresultado , SUM(enproceso) informe_enproceso
+                    , SUM(enviadocliente) informe_enviadocliente
+                    FROM 
+                    (
+                    select 
+                     ccustodia_cab.oservicio,ncertificado,
+                    tpedidos.fechactped  ,
+                    if( ccustodia_cab.IDUNIDAD_n='0000000001','MAM',
+                    if( ccustodia_cab.IDUNIDAD_n='0000000002','AGRO',
+                    if( ccustodia_cab.IDUNIDAD_n='0000000003','ALI',
+                    if( ccustodia_cab.IDUNIDAD_n='0000000004','GEO','')))) UNIDANEGOCIO ,
+                    if (tpedidos.IdEstadOServ ='001' OR tpedidos.IdEstadOServ='017',1,0) enproceso , 
+                    if (tpedidos.IdEstadOServ = '002'   ,1,0) Conresultado , 
+                    if (tpedidos.IdEstadOServ = '013'   ,1,0) enviadocliente , 
+                    DATEDIFF( now() , tpedidos.fechactped)     Dias_informe 
+                    
+                    from 
+                    Tpedidos
+                    join ccustodia_cab on tpedidos.nro_cadena=ccustodia_cab.idcustodia
+                    join t_orden_servicio oss on oss.idproforma = ccustodia_cab.idproforma 
+                       WHERE 
+                       oss.estado IN ('08') AND oss.idcliente <>'0000000372' AND 
+                    fechactped >='2023-01-01' and fechactped<=NOW() AND tpedidos.IdEstadOServ  IN ('001','002','013','017') AND ccustodia_cab.IDUNIDAD_n LIKE  '0000000002'   ORDER BY oservicio
+                    ) AS aaaa
+                    GROUP BY  oservicio, dias_informe ORDER BY  dias_informe
+            )  AS listado 
+            Group by dias_informe";
+            $arreglo = array();
+            if($consulta = $this -> conexion -> conexion -> query($sql)){
+                while ($consulta_VU = mysqli_fetch_array($consulta)){
+                    $arreglo[] = $consulta_VU;
+                }
+                return $arreglo;
+                $this->conexion->cerrar();
+            }
+        }
+        function TraerDatosLinealAlimentos(){
+            $sql = "SELECT  dias_informe ,  SUM(informe_enviadocliente) Enviadocli , SUM(informe_conresultado) ConResultado , 
+            SUM(informe_enproceso) EnProceso
+             From
+             (
+                    SELECT oservicio ,   dias_informe, SUM(Conresultado) informe_conresultado , SUM(enproceso) informe_enproceso
+                    , SUM(enviadocliente) informe_enviadocliente
+                    FROM 
+                    (
+                    select 
+                     ccustodia_cab.oservicio,ncertificado,
+                    tpedidos.fechactped  ,
+                    if( ccustodia_cab.IDUNIDAD_n='0000000001','MAM',
+                    if( ccustodia_cab.IDUNIDAD_n='0000000002','AGRO',
+                    if( ccustodia_cab.IDUNIDAD_n='0000000003','ALI',
+                    if( ccustodia_cab.IDUNIDAD_n='0000000004','GEO','')))) UNIDANEGOCIO ,
+                    if (tpedidos.IdEstadOServ ='001' OR tpedidos.IdEstadOServ='017',1,0) enproceso , 
+                    if (tpedidos.IdEstadOServ = '002'   ,1,0) Conresultado , 
+                    if (tpedidos.IdEstadOServ = '013'   ,1,0) enviadocliente , 
+                    DATEDIFF( now() , tpedidos.fechactped)     Dias_informe 
+                    
+                    from 
+                    Tpedidos
+                    join ccustodia_cab on tpedidos.nro_cadena=ccustodia_cab.idcustodia
+                    join t_orden_servicio oss on oss.idproforma = ccustodia_cab.idproforma 
+                       WHERE 
+                       oss.estado IN ('08') AND oss.idcliente <>'0000000372' AND 
+                    fechactped >='2023-01-01' and fechactped<=NOW() AND tpedidos.IdEstadOServ  IN ('001','002','013','017') AND ccustodia_cab.IDUNIDAD_n LIKE  '0000000003'   ORDER BY oservicio
+                    ) AS aaaa
+                    GROUP BY  oservicio, dias_informe ORDER BY  dias_informe
+            )  AS listado 
+            Group by dias_informe";
+            $arreglo = array();
+            if($consulta = $this -> conexion -> conexion -> query($sql)){
+                while ($consulta_VU = mysqli_fetch_array($consulta)){
+                    $arreglo[] = $consulta_VU;
+                }
+                return $arreglo;
+                $this->conexion->cerrar();
+            }
+        }
+        function TraerDatosLinealGeoquimica(){
+            $sql = "SELECT  dias_informe ,  SUM(informe_enviadocliente) Enviadocli , SUM(informe_conresultado) ConResultado , 
+            SUM(informe_enproceso) EnProceso
+             From
+             (
+                    SELECT oservicio ,   dias_informe, SUM(Conresultado) informe_conresultado , SUM(enproceso) informe_enproceso
+                    , SUM(enviadocliente) informe_enviadocliente
+                    FROM 
+                    (
+                    select 
+                     ccustodia_cab.oservicio,ncertificado,
+                    tpedidos.fechactped  ,
+                    if( ccustodia_cab.IDUNIDAD_n='0000000001','MAM',
+                    if( ccustodia_cab.IDUNIDAD_n='0000000002','AGRO',
+                    if( ccustodia_cab.IDUNIDAD_n='0000000003','ALI',
+                    if( ccustodia_cab.IDUNIDAD_n='0000000004','GEO','')))) UNIDANEGOCIO ,
+                    if (tpedidos.IdEstadOServ ='001' OR tpedidos.IdEstadOServ='017',1,0) enproceso , 
+                    if (tpedidos.IdEstadOServ = '002'   ,1,0) Conresultado , 
+                    if (tpedidos.IdEstadOServ = '013'   ,1,0) enviadocliente , 
+                    DATEDIFF( now() , tpedidos.fechactped)     Dias_informe 
+                    
+                    from 
+                    Tpedidos
+                    join ccustodia_cab on tpedidos.nro_cadena=ccustodia_cab.idcustodia
+                    join t_orden_servicio oss on oss.idproforma = ccustodia_cab.idproforma 
+                       WHERE 
+                       oss.estado IN ('08') AND oss.idcliente <>'0000000372' AND 
+                    fechactped >='2023-01-01' and fechactped<=NOW() AND tpedidos.IdEstadOServ  IN ('001','002','013','017') AND ccustodia_cab.IDUNIDAD_n LIKE  '0000000004'   ORDER BY oservicio
+                    ) AS aaaa
+                    GROUP BY  oservicio, dias_informe ORDER BY  dias_informe
+            )  AS listado 
+            Group by dias_informe";
+            $arreglo = array();
+            if($consulta = $this -> conexion -> conexion -> query($sql)){
+                while ($consulta_VU = mysqli_fetch_array($consulta)){
+                    $arreglo[] = $consulta_VU;
+                }
+                return $arreglo;
+                $this->conexion->cerrar();
+            }
+        }
+        function TraerDatosLinealCalibracion(){
+            $sql = "SELECT  dias_informe ,  SUM(informe_enviadocliente) Enviadocli , SUM(informe_conresultado) ConResultado , 
+            SUM(informe_enproceso) EnProceso
+             From
+             (
+                    SELECT oservicio ,   dias_informe, SUM(Conresultado) informe_conresultado , SUM(enproceso) informe_enproceso
+                    , SUM(enviadocliente) informe_enviadocliente
+                    FROM 
+                    (
+                    select 
+                     ccustodia_cab.oservicio,ncertificado,
+                    tpedidos.fechactped  ,
+                    if( ccustodia_cab.IDUNIDAD_n='0000000001','MAM',
+                    if( ccustodia_cab.IDUNIDAD_n='0000000002','AGRO',
+                    if( ccustodia_cab.IDUNIDAD_n='0000000003','ALI',
+                    if( ccustodia_cab.IDUNIDAD_n='0000000004','GEO','')))) UNIDANEGOCIO ,
+                    if (tpedidos.IdEstadOServ ='001' OR tpedidos.IdEstadOServ='017',1,0) enproceso , 
+                    if (tpedidos.IdEstadOServ = '002'   ,1,0) Conresultado , 
+                    if (tpedidos.IdEstadOServ = '013'   ,1,0) enviadocliente , 
+                    DATEDIFF( now() , tpedidos.fechactped)     Dias_informe 
+                    
+                    from 
+                    Tpedidos
+                    join ccustodia_cab on tpedidos.nro_cadena=ccustodia_cab.idcustodia
+                    join t_orden_servicio oss on oss.idproforma = ccustodia_cab.idproforma 
+                       WHERE 
+                       oss.estado IN ('08') AND oss.idcliente <>'0000000372' AND 
+                    fechactped >='2023-01-01' and fechactped<=NOW() AND tpedidos.IdEstadOServ  IN ('001','002','013','017') AND ccustodia_cab.IDUNIDAD_n LIKE  '0000000005'   ORDER BY oservicio
+                    ) AS aaaa
+                    GROUP BY  oservicio, dias_informe ORDER BY  dias_informe
+            )  AS listado 
+            Group by dias_informe";
             $arreglo = array();
             if($consulta = $this -> conexion -> conexion -> query($sql)){
                 while ($consulta_VU = mysqli_fetch_array($consulta)){

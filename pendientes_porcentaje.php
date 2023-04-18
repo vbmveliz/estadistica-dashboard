@@ -21,10 +21,10 @@ include 'header.php';
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-6">
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">Estado IE</h3>
+                                <h3 class="card-title">Estado IE General</h3>
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                         <i class="fas fa-minus"></i>
@@ -32,89 +32,6 @@ include 'header.php';
                                 </div>
                             </div>
                             <div class="card-body">
-                            <form>
-                                <div class="row">
-                                    <div class="col-6 text-center">
-                                        <div class="text-white">
-                                            <div class="form-group">
-                                                <input type="date" class="form-control" id="fechaInicio"
-                                                    <?php 
-                                                        $dia = date("d");
-                                                        $mes =date("m");
-                                                        $ano = date("Y");
-                                                        if($mes < 12){
-                                                        $mes = $mes - 2;
-                                                        if($mes < 10){
-                                                            $mes = "0".$mes;
-                                                        }
-                                                        }
-                                                        if($mes <= 0){
-                                                        $mes = 12;
-                                                        $ano = $ano - 1;
-                                                        }
-                                                        $fecha = $ano."-".$mes."-".$dia; 
-                                                        ?>
-                                                min="<?php echo $fecha;?>" max="<?php echo date("Y-m-d");?>">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 text-center">
-                                        <div class="text-white">
-                                            <div class="d-flex justify-content-center">
-                                            <input type="date" class="form-control" id="fechaFinal"
-                                            min="<?php echo $fecha;?>" max="<?php echo date("Y-m-d");?>">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 text-center">
-                                        <div class="text-white">
-                                            <div class="form-group">
-                                                <select class="form-control" id="tipo">
-                                                    <option>Con Resultado</option>
-                                                    <option>En Proceso</option>
-                                                    <option>Enviado al Cliente</option>
-                                                    <option>Sin filtro</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 text-center">
-                                        <div class="text-white">
-                                            <div class="form-group">
-                                                <select class="form-control" id="unidadNegocio">
-                                                    <option>Medio Ambiente</option>
-                                                    <option>Agronomía</option>
-                                                    <option>Alimentos</option>
-                                                    <option>Geoquímica</option>
-                                                    <option>Metrologia (Calibraciones)</option>
-                                                    <option>Sin filtro</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 text-center">
-                                        <div class="text-white">
-                                            <div class="form-group">
-                                            <input type="number" class="form-control" id="rango" min="0">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 text-center">
-                                        <div class="text-white">
-                                            <div class="d-flex justify-content-center">
-                                                <input type="submit" class="btn btn-info btn-block" id="btnConsultar" value="Consultar">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                            <div class="text-center mt-3">
-                                        <div class="text-white">
-                                            <div class="d-flex justify-content-center">
-                                                <button class="btn btn-secondary btn-block" onclick="porcentaje()">Porcentaje</button>
-                                            </div>
-                                        </div>
-                                    </div>
                                 <div class="row">
                                     <div class="col-4" id="resultado"></div>
                                     <div class="col-4" id="proceso"></div>
@@ -124,10 +41,10 @@ include 'header.php';
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="card card-info">
                             <div class="card-header">
-                                <h3 class="card-title">Detalle</h3>
+                                <h3 class="card-title">Estado IE Unidad de Negocio</h3>
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                         <i class="fas fa-minus"></i>
@@ -135,59 +52,16 @@ include 'header.php';
                                 </div>
                             </div>
                             <div class="card-body">
-                                <div class="chart" style="height: 745px; overflow:scroll;" id="general">
-                                    <table class="table table-striped text-center">
-                                        <thead>
-                                            <tr>
-                                                <th>Días</th>
-                                                <th>Enviado al Cliente</th>
-                                                <th>Con Resultado</th>
-                                                <th>En Proceso</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="tablaResumen">
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="chart d-none" style="height: 745px; overflow:scroll;" id="enviadoCliente">
-                                    <table class="table table-striped text-center">
-                                        <thead>
-                                            <tr>
-                                                <th>Días</th>
-                                                <th>Enviado al Cliente</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="tablaEnviado">
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="chart d-none" style="height: 745px; overflow:scroll;" id="conResultado">
-                                    <table class="table table-striped text-center">
-                                        <thead>
-                                            <tr>
-                                                <th>Días</th>
-                                                <th>Con Resultado</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="tablaResultado">
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="chart d-none" style="height: 745px; overflow:scroll;" id="enProceso">
-                                    <table class="table table-striped text-center">
-                                        <thead>
-                                            <tr>
-                                                <th>Días</th>
-                                                <th>En Proceso</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="tablaEnProceso">
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                <div class="row">
+                                    <div class="col-6"id="medioAmbiente"></div>
+                                    <div class="col-6" id="agronomia"></div>       
+                                    <div class="col-6" id="alimentos"></div>            
+                                    <div class="col-6" id="geoquimica"></div>              
+                                    <div class="col-6" id="calibracion"></div>
+                                </div>                                                    
+                            </div>   
+                        </div>                  
+                    </div>          
                 </div>
             </div>
         </section>
@@ -198,204 +72,6 @@ include 'header.php';
     </footer>
     <aside class="control-sidebar control-sidebar-dark">
     </aside>
-</div>
-<!-- The Modal -->
-<div class="modal" id="myModal">
-    <div class="modal-dialog" style="max-width: 1000px;">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <!-- Modal body -->
-            <div class="modal-body">
-                <div style="overflow:scroll;">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>OS</th>
-                                <th>Días de Informe</th>
-                                <th>Informe Enviado al Cliente</th>
-                                <th>Informe Con Resultado</th>
-                                <th>Informe En Proceso</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tablaDetalle"></tbody>
-                    </table>
-                    <div class="row">
-                        <div class="col-4" id="informeResultado"></div>
-                        <div class="col-4" id="informeProceso"></div>
-                        <div class="col-4" id="informeEnviado"></div>
-                    </div>
-                </div>
-            </div>    
-        </div>
-    </div>
-</div>
-<div class="modal" id="myModal2">
-    <div class="modal-dialog" style="max-width: 1500px;">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <!-- Modal body -->
-            <div class="modal-body">
-                <form>
-                    <div class="row">
-                        <div class="col-4">
-                            <div class="text-white">
-                                <div class="form-group">
-                                    <select class="form-control" id="tecnicas">
-                                        <option value="ColMe">Colorimetricos</option>
-                                        <option value="Elect">Electrometricos</option>
-                                        <option value="Volum">Fisico</option>
-                                        <option value="FqAgu">Físico Químico Aguas</option>
-                                        <option value="FqSue">Físico Químico Suelos</option>
-                                        <option value="Gavim">Gravimetricos</option>
-                                        <option value="Hidro">Hidrobiológico</option>
-                                        <option value="Intru">Instrumental</option>
-                                        <option value="InCro">Instrumental Cromatografia</option>
-                                        <option value="InMet">Instrumental Metales</option>
-                                        <option value="Micro">MicroBiologicos</option>
-                                        <option value="Volum">Sensorial</option>
-                                        <option value="Volum">Volumetricos</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="text-white">
-                                <div class="form-group">
-                                    <select class="form-control" id="laboratorio">
-                                        <option>Operaciones</option>
-                                        <option>Laboratorio FIQ (Agua y suelo)</option>
-                                        <option>Laboratorio de Metales</option>
-                                        <option>Laboratorio de Cromatografia</option>
-                                        <option>Laboratorio Microbiología y Parasitología</option>
-                                        <option>Laboratorio de -hidrobiología</option>
-                                        <option>Laboratorio FIQ (Aire,Emisiones)</option>
-                                        <option>Jefatura de Operaciones</option>
-                                        <option>Jefatura de Mantenimiento</option>
-                                        <option>Jefatura de Laboratorio de Calibraciones</option>
-                                        <option>Agronomía</option>
-                                        <option>Laboratorio de Radiometría</option>
-                                        <option>Laboratorio de Metrologia</option>
-                                        <option>Laboratorio de temperatura</option>
-                                        <option>Laboratorio de humedad</option>
-                                        <option>Laboratorio de masa</option>
-                                        <option>Laboratorio de presión</option>
-                                        <option>Laboratorio de volumen</option>
-                                        <option>Laboratorio de acústica</option>
-                                        <option>Laboratorio de Fisicoquímica</option>
-                                        <option>Laboratorio de caudal</option>
-                                        <option>Laboratorio de concetración de gases</option>
-                                        <option>Laboratorio de dimensión</option>
-                                        <option>Laboratorio de electricidad</option>
-
-                                        <option>Laboratorio de tiempo y frecuencia</option>
-                                        <option>Laboratorio de óptica</option>
-                                        <option>Laboratorio de velacidad</option>
-                                        <option>Laboratorio de Agronomía</option>
-                                        <option>Geoquímica</option>
-                                        <option>Laboratorio de Geoquímica</option>
-                                        <option>Laboratorio de Temperatura y Húmedad</option>
-                                        <option>Laboratorio de grandes volúmenes</option>
-                                        <option>Laboratorio de Masa y Volumen</option>
-                                        <option>Laboratorio de Presión,Fuerza y Torsional</option>
-                                        <option>Laboratorio de Caudal y Concentración de Gases</option>
-                                        <option>Laboratorio de velocidad y dimiensional</option>
-                                        <option>Laboratorio de Fisicoquímica(Calib.)</option>
-
-                                        <option>Laboratorio de electricidad(Calib.)</option>
-                                        <option>Laboratorio de Fisicosensorial</option>
-                                        <option>Laboratorio de Fisicoquímica - Alimentos</option>
-                                        <option>Laboratorio de Longitud</option>
-
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <input type="submit" class="btn btn-block btn-info" value="Consultar" id="consultarFiltrosInforme">
-                        </div>
-                    </div>
-                    <div id="capturarDia"></div>
-                    <div id="capturarEstado"></div>
-                    <div id="capturarUnidad"></div>
-                    <div style="overflow:scroll;" id="generalDia">
-                        <table class="table table-striped w-100">
-                            <thead>
-                                <tr>
-                                    <th>Estado</th>
-                                    <th>OS</th>
-                                    <th>Número de Informe</th>
-                                    <th>Fecha</th>
-                                    <th>Unidad de Negocio</th>
-                                    <th>Informe Enviado al Cliente</th>
-                                    <th>Informe Con Resultado</th>
-                                    <th>Informe En Proceso</th>
-                                    <th>Tecnicas</th>
-                                    <th>Laboratorio</th>
-                                    <th>Día</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tablaDetalleInforme"></tbody>
-                        </table>
-                    </div>
-                    <div style="overflow:scroll;" class="d-none" id="enviadoDia">
-                        <table class="table table-striped w-100">
-                            <thead>
-                                <tr>
-                                    <th>Estado</th>
-                                    <th>OS</th>
-                                    <th>Número de Informe</th>
-                                    <th>Fecha</th>
-                                    <th>Informe Enviado al Cliente</th>
-                                    <th>Día</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tablaDetalleInformeEnviado"></tbody>
-                        </table>
-                    </div>
-                    <div style="overflow:scroll;" class="d-none" id="resultadoDia">
-                        <table class="table table-striped w-100">
-                            <thead>
-                                <tr>
-                                    <th>Estado</th>
-                                    <th>OS</th>
-                                    <th>Número de Informe</th>
-                                    <th>Fecha</th>
-                                    <th>Unidad de Negocio</th>
-                                    <th>Informe Con Resultado</th>
-                                    <th>Día</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tablaDetalleInformeConResultado"></tbody>
-                        </table>
-                    </div>
-                    <div style="overflow:scroll;" class="d-none" id="procesoDia">
-                        <table class="table table-striped w-100">
-                            <thead>
-                                <tr>
-                                    <th>Estado</th>
-                                    <th>OS</th>
-                                    <th>Número de Informe</th>
-                                    <th>Fecha</th>
-                                    <th>Unidad de Negocio</th>
-                                    <th>Informe En Proceso</th>
-                                    <th>Tecnicas</th>
-                                    <th>Laboratorio</th>
-                                    <th>Día</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tablaDetalleInformeProceso"></tbody>
-                        </table>
-                    </div>
-                </form>
-            </div>    
-        </div> 
-    </div>
 </div>
 </div>
 <!-- jQuery -->
@@ -418,76 +94,304 @@ include 'header.php';
             url:'scripts/controlador_linea.php',
             type: 'POST'
         }).done(function(respuesta){
-            var titulo = [];
-            var cantidadResultado = [];
-            var cantidadProceso = [];
-            var cantidadEnviClie = [];
-            var data = JSON.parse(respuesta);
-            for(var i = 0; i < data.length; i++){
-                titulo.push(data[i][0]);
-                cantidadEnviClie.push(data[i][1]);
-                cantidadResultado.push(data[i][2]);
-                cantidadProceso.push(data[i][3]);
-            }
-            const ctx = document.getElementById('line-chart');
-            const mixedChart = new Chart(ctx, {
-            data: {
-                datasets: [{
-                    type: 'bar',
-                    label: 'Con Resultado',
-                    data: cantidadResultado,
-                    backgroundColor: 'rgb(0, 0, 255)'
-                }, {
-                    type: 'bar',
-                    label: 'En Proceso',
-                    data: cantidadProceso,
-                    backgroundColor: 'rgb(255, 0, 19)'
-                }, {
-                    type: 'bar',
-                    label: 'Enviado al cliente',
-                    data: cantidadEnviClie,
-                    backgroundColor: 'rgb(38, 195, 54)'
-                }],
-                labels: titulo
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-        let template = '';
             let totalResultado = 0;
             let totalProceso = 0;
             let totalEnviado = 0;
+            var data = JSON.parse(respuesta);
             data.forEach(datos => {
-            let numeroResultado = Number(datos[2]);
-            let numeroProceso = Number(datos[3]);
-            let numeroEnviado = Number(datos[1]);
-            totalResultado += numeroResultado;
-            totalProceso += numeroProceso;
-            totalEnviado += numeroEnviado;
-            template += `
-                    <tr>
-                        <td><button class="btn btn-outline-info" dia="${datos[0]}" unidad="sinFiltro" estado="enProceso" onclick="mostrar(this)" data-toggle="modal" data-target="#myModal2">${datos[0]}</button></td>
-                        <td>${numeroEnviado}</td>
-                        <td>${numeroResultado}</td>
-                        <td>${numeroProceso}</td>
-                    </tr>
-                    `
+                let numeroResultado = Number(datos[2]);
+                let numeroProceso = Number(datos[3]);
+                let numeroEnviado = Number(datos[1]);
+                totalResultado += numeroResultado;
+                totalProceso += numeroProceso;
+                totalEnviado += numeroEnviado;
             });
-            $('#tablaResumen').html(template);
-            let h3Resultado = `<h6 class="nav-link" style="color: rgb(0, 0, 255);">Total con Resultado: ${totalResultado}</h6>`;
-            let h3PRoceso = `<h6 class="nav-link" style="color: rgb(255, 0, 19);">Total con Proceso: ${totalProceso}</h6>`;
-            let h3Enviado = `<h6 class="nav-link" style="color: rgb(38, 195, 54);">Total Enviados: ${totalEnviado}</h6>`;
+            let totalIE= totalResultado+totalProceso+totalEnviado;
+
+            var operacionResultado = (totalResultado*100)/totalIE;
+            let porcentajeTotalResultado= Number(operacionResultado.toFixed(2));
+
+            var operacionProceso = (totalProceso*100)/totalIE;
+            let porcentajeTotalProceso= Number(operacionProceso.toFixed(2));
+
+            var operacionEnviado = (totalEnviado*100)/totalIE;
+            let porcentajeTotalEnviado= Number(operacionEnviado.toFixed(2));
+            const ctx = document.getElementById('line-chart');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Con Resultado','En Proceso','Enviado al Cliente'],
+                    datasets: [{
+                    data: [porcentajeTotalResultado,porcentajeTotalProceso,porcentajeTotalEnviado],
+                    backgroundColor:['rgb(0, 0, 255)','rgb(255, 0, 19)','rgb(38, 195, 54)'],
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+            let h3Resultado = `<h6 class="nav-link" style="color: rgb(0, 0, 255);">Total con Resultado: ${totalResultado}</h6><h6 class="nav-link" style="color: rgb(0, 0, 255);">Total con Resultado (%): ${porcentajeTotalResultado} %</h6>`;
+            let h3PRoceso = `<h6 class="nav-link" style="color: rgb(255, 0, 19);">Total con Proceso: ${totalProceso}</h6><h6 class="nav-link" style="color: rgb(255, 0, 19);">Total con Proceso (%): ${porcentajeTotalProceso} %</h6>`;
+            let h3Enviado = `<h6 class="nav-link" style="color: rgb(38, 195, 54);">Total Enviados: ${totalEnviado}</h6><h6 class="nav-link" style="color: rgb(38, 195, 54)">Total Enviados (%): ${porcentajeTotalEnviado} %</h6>`;
             $('#resultado').html(h3Resultado);
             $('#proceso').html(h3PRoceso);
             $('#enviado').html(h3Enviado);
-
         })
+        graficoMedioAmbiente();
+        graficoAgronomia();
+        graficoAlimentos();
+        graficoGeoquimico();
+        graficoCalibracion();
     });
+    function graficoMedioAmbiente(){
+        $('#medioAmbiente').empty();
+        $('#medioAmbiente').append('<canvas id="grafico_MedioAmbiente"  style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>');
+        $.ajax({
+            url:'scripts/controlador_lineal_medio_ambiente.php',
+            type: 'POST'
+        }).done(function(respuesta){
+            let totalResultado = 0;
+            let totalProceso = 0;
+            let totalEnviado = 0;
+            var data = JSON.parse(respuesta);
+            data.forEach(datos => {
+                let numeroResultado = Number(datos[2]);
+                let numeroProceso = Number(datos[3]);
+                let numeroEnviado = Number(datos[1]);
+                totalResultado += numeroResultado;
+                totalProceso += numeroProceso;
+                totalEnviado += numeroEnviado;
+            });
+            let totalIE= totalResultado+totalProceso+totalEnviado;
+
+            var operacionResultado = (totalResultado*100)/totalIE;
+            let porcentajeTotalResultado= Number(operacionResultado.toFixed(2));
+
+            var operacionProceso = (totalProceso*100)/totalIE;
+            let porcentajeTotalProceso= Number(operacionProceso.toFixed(2));
+
+            var operacionEnviado = (totalEnviado*100)/totalIE;
+            let porcentajeTotalEnviado= Number(operacionEnviado.toFixed(2));
+            const ctx = document.getElementById('grafico_MedioAmbiente');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Con Resultado','En Proceso','Enviado al Cliente'],
+                    datasets: [{
+                    data: [porcentajeTotalResultado,porcentajeTotalProceso,porcentajeTotalEnviado],
+                    backgroundColor:['rgb(0, 0, 255)','rgb(255, 0, 19)','rgb(38, 195, 54)'],
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        })
+    }
+    function graficoAgronomia(){
+        $('#agronomia').empty();
+        $('#agronomia').append('<canvas id="grafico_Agronomia" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>');
+        $.ajax({
+            url:'scripts/controlador_lineal_agronomia.php',
+            type: 'POST'
+        }).done(function(respuesta){
+            let totalResultado = 0;
+            let totalProceso = 0;
+            let totalEnviado = 0;
+            var data = JSON.parse(respuesta);
+            data.forEach(datos => {
+                let numeroResultado = Number(datos[2]);
+                let numeroProceso = Number(datos[3]);
+                let numeroEnviado = Number(datos[1]);
+                totalResultado += numeroResultado;
+                totalProceso += numeroProceso;
+                totalEnviado += numeroEnviado;
+            });
+            let totalIE= totalResultado+totalProceso+totalEnviado;
+
+            var operacionResultado = (totalResultado*100)/totalIE;
+            let porcentajeTotalResultado= Number(operacionResultado.toFixed(2));
+
+            var operacionProceso = (totalProceso*100)/totalIE;
+            let porcentajeTotalProceso= Number(operacionProceso.toFixed(2));
+
+            var operacionEnviado = (totalEnviado*100)/totalIE;
+            let porcentajeTotalEnviado= Number(operacionEnviado.toFixed(2));
+            const ctx = document.getElementById('grafico_Agronomia');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Con Resultado','En Proceso','Enviado al Cliente'],
+                    datasets: [{
+                    data: [porcentajeTotalResultado,porcentajeTotalProceso,porcentajeTotalEnviado],
+                    backgroundColor:['rgb(0, 0, 255)','rgb(255, 0, 19)','rgb(38, 195, 54)'],
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        })
+    }
+    function graficoAlimentos(){
+        $('#alimentos').empty();
+        $('#alimentos').append('<canvas id="grafico_Alimentos" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>');
+        $.ajax({
+            url:'scripts/controlador_lineal_alimentos.php',
+            type: 'POST'
+        }).done(function(respuesta){
+            let totalResultado = 0;
+            let totalProceso = 0;
+            let totalEnviado = 0;
+            var data = JSON.parse(respuesta);
+            data.forEach(datos => {
+                let numeroResultado = Number(datos[2]);
+                let numeroProceso = Number(datos[3]);
+                let numeroEnviado = Number(datos[1]);
+                totalResultado += numeroResultado;
+                totalProceso += numeroProceso;
+                totalEnviado += numeroEnviado;
+            });
+            let totalIE= totalResultado+totalProceso+totalEnviado;
+
+            var operacionResultado = (totalResultado*100)/totalIE;
+            let porcentajeTotalResultado= Number(operacionResultado.toFixed(2));
+
+            var operacionProceso = (totalProceso*100)/totalIE;
+            let porcentajeTotalProceso= Number(operacionProceso.toFixed(2));
+
+            var operacionEnviado = (totalEnviado*100)/totalIE;
+            let porcentajeTotalEnviado= Number(operacionEnviado.toFixed(2));
+            const ctx = document.getElementById('grafico_Alimentos');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Con Resultado','En Proceso','Enviado al Cliente'],
+                    datasets: [{
+                    data: [porcentajeTotalResultado,porcentajeTotalProceso,porcentajeTotalEnviado],
+                    backgroundColor:['rgb(0, 0, 255)','rgb(255, 0, 19)','rgb(38, 195, 54)'],
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        })
+    }
+    function graficoGeoquimico(){
+        $('#geoquimica').empty();
+        $('#geoquimica').append('<canvas id="grafico_Geoquimica" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>');
+        $.ajax({
+            url:'scripts/controlador_lineal_geoquimica.php',
+            type: 'POST'
+        }).done(function(respuesta){
+            let totalResultado = 0;
+            let totalProceso = 0;
+            let totalEnviado = 0;
+            var data = JSON.parse(respuesta);
+            data.forEach(datos => {
+                let numeroResultado = Number(datos[2]);
+                let numeroProceso = Number(datos[3]);
+                let numeroEnviado = Number(datos[1]);
+                totalResultado += numeroResultado;
+                totalProceso += numeroProceso;
+                totalEnviado += numeroEnviado;
+            });
+            let totalIE= totalResultado+totalProceso+totalEnviado;
+
+            var operacionResultado = (totalResultado*100)/totalIE;
+            let porcentajeTotalResultado= Number(operacionResultado.toFixed(2));
+
+            var operacionProceso = (totalProceso*100)/totalIE;
+            let porcentajeTotalProceso= Number(operacionProceso.toFixed(2));
+
+            var operacionEnviado = (totalEnviado*100)/totalIE;
+            let porcentajeTotalEnviado= Number(operacionEnviado.toFixed(2));
+            const ctx = document.getElementById('grafico_Geoquimica');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Con Resultado','En Proceso','Enviado al Cliente'],
+                    datasets: [{
+                    data: [porcentajeTotalResultado,porcentajeTotalProceso,porcentajeTotalEnviado],
+                    backgroundColor:['rgb(0, 0, 255)','rgb(255, 0, 19)','rgb(38, 195, 54)'],
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        })
+    }
+    function graficoCalibracion(){
+        $('#calibracion').empty();
+        $('#calibracion').append('<canvas id="grafico_Calibracion" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>');
+        $.ajax({
+            url:'scripts/controlador_lineal_calibracion.php',
+            type: 'POST'
+        }).done(function(respuesta){
+            let totalResultado = 0;
+            let totalProceso = 0;
+            let totalEnviado = 0;
+            var data = JSON.parse(respuesta);
+            data.forEach(datos => {
+                let numeroResultado = Number(datos[2]);
+                let numeroProceso = Number(datos[3]);
+                let numeroEnviado = Number(datos[1]);
+                totalResultado += numeroResultado;
+                totalProceso += numeroProceso;
+                totalEnviado += numeroEnviado;
+            });
+            let totalIE= totalResultado+totalProceso+totalEnviado;
+
+            var operacionResultado = (totalResultado*100)/totalIE;
+            let porcentajeTotalResultado= Number(operacionResultado.toFixed(2));
+
+            var operacionProceso = (totalProceso*100)/totalIE;
+            let porcentajeTotalProceso= Number(operacionProceso.toFixed(2));
+
+            var operacionEnviado = (totalEnviado*100)/totalIE;
+            let porcentajeTotalEnviado= Number(operacionEnviado.toFixed(2));
+            const ctx = document.getElementById('grafico_Calibracion');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Con Resultado','En Proceso','Enviado al Cliente'],
+                    datasets: [{
+                    data: [porcentajeTotalResultado,porcentajeTotalProceso,porcentajeTotalEnviado],
+                    backgroundColor:['rgb(0, 0, 255)','rgb(255, 0, 19)','rgb(38, 195, 54)'],
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        })
+    }
     $('#btnConsultar').click(function(){
         $('#graficoEstado').empty();
         $('#graficoEstado').append('<canvas id="line-chart" style="min-height: 555px; height: 555px; max-height: 555px; max-width: 100%;"></canvas>');
@@ -509,10 +413,7 @@ include 'header.php';
             valueUnidad = "0000000005";
         }
         let rango = $('#rango').val();
-        var rangoNumero = "";
-        if(rango != ""){
-            var rangoNumero = parseInt(rango);
-        }
+        rangoNumero = parseInt(rango);
         $.ajax({
             url:'scripts/controlador_linea_fecha.php',
             data:{fechaInicio:fechaInicio, fechaFinal: fechaFinal, valueUnidad:valueUnidad},
@@ -529,7 +430,7 @@ include 'header.php';
                     cantidadEnviClie.push(data[i][1]);
                     cantidadResultado.push(data[i][2]);
                     cantidadProceso.push(data[i][3]);
-                }else if(rangoNumero == ""){
+                }else{
                     titulo.push(data[i][0]);
                     cantidadEnviClie.push(data[i][1]);
                     cantidadResultado.push(data[i][2]);
@@ -681,7 +582,7 @@ include 'header.php';
                             </tr>
                         `
                 }
-            }else if(rangoNumero == ""){
+            }else{
                 if(valueTipo == "Con Resultado"){
                     if(numeroResultado != 0){
                         totalResultado += numeroResultado;
@@ -1265,21 +1166,21 @@ include 'header.php';
             });
             const ctx = document.getElementById('line-chart');
             new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: ['Con Resultado','En Proceso','Enviado al Cliente'],
-                    datasets: [{
-                    data: [totalResultado,totalProceso,totalEnviado],
-                    backgroundColor:['rgb(0, 0, 255)','rgb(255, 0, 19)','rgb(38, 195, 54)'],
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
+            type: 'pie',
+            data: {
+                labels: ['Con Resultado','En Proceso','Enviado al Cliente'],
+                datasets: [{
+                data: [totalResultado,totalProceso,totalEnviado],
+                backgroundColor:['rgb(0, 0, 255)','rgb(255, 0, 19)','rgb(38, 195, 54)'],
+                }]
+            },
+            options: {
+                scales: {
+                y: {
+                    beginAtZero: true
                 }
+                }
+            }
             });
         });
     };

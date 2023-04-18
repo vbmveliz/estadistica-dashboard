@@ -93,7 +93,7 @@ $url = $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"];
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <?php if($url == "localhost/Estadistica/index.php"): ?>
+                        <?php if($url == "localhost/Estadistica/index.php" || $url == "localhost/Estadistica/"): ?>
                             <li class="nav-item">
                                 <a href="index.php" class="nav-link active">
                                     <i class="far fa-circle nav-icon"></i>
@@ -138,9 +138,24 @@ $url = $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"];
                                 </a>
                             </li>
                         <?php endif ?>
+                        <?php if($url == "localhost/Estadistica/pendientes_porcentaje.php"): ?>
+                            <li class="nav-item">
+                                <a href="pendientes_porcentaje.php" class="nav-link active">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Informes pendientes Porcentaje</p>
+                                </a>
+                            </li>
+                        <?php else: ?>
+                            <li class="nav-item">
+                                <a href="pendientes_porcentaje.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Informes pendientes Porcentaje</p>
+                                </a>
+                            </li>
+                        <?php endif ?>
                     </ul>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-chart-pie"></i>
                         <p>
@@ -156,7 +171,7 @@ $url = $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"];
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> -->
             </ul>
         </nav>
     </div>

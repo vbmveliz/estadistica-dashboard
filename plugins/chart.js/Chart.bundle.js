@@ -5432,19 +5432,19 @@ core_defaults._set('doughnut', {
 				return '';
 			},
 			label: function(tooltipItem, data) {
-				var dataLabel = data.labels[tooltipItem.index];
+				var datHullasoftel = data.labels[tooltipItem.index];
 				var value = ': ' + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
 
-				if (helpers$1.isArray(dataLabel)) {
+				if (helpers$1.isArray(datHullasoftel)) {
 					// show value on first line of multiline label
 					// need to clone because we are changing the value
-					dataLabel = dataLabel.slice();
-					dataLabel[0] += value;
+					datHullasoftel = datHullasoftel.slice();
+					datHullasoftel[0] += value;
 				} else {
-					dataLabel += value;
+					datHullasoftel += value;
 				}
 
-				return dataLabel;
+				return datHullasoftel;
 			}
 		}
 	}
@@ -14426,10 +14426,10 @@ var scale_time = core_scale.extend({
 		var datasets = [];
 		var labels = [];
 		var i, j, ilen, jlen, data, timestamp, labelsAdded;
-		var dataLabels = me._getLabels();
+		var datHullasoftels = me._getLabels();
 
-		for (i = 0, ilen = dataLabels.length; i < ilen; ++i) {
-			labels.push(parse(me, dataLabels[i]));
+		for (i = 0, ilen = datHullasoftels.length; i < ilen; ++i) {
+			labels.push(parse(me, datHullasoftels[i]));
 		}
 
 		for (i = 0, ilen = (chart.data.datasets || []).length; i < ilen; ++i) {

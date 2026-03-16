@@ -11,7 +11,7 @@
             $this -> servidor = "192.168.2.26";
             $this -> usuario = "gchalaca";
             $this -> contrasena = "a1a0PfizeR";
-            $this -> basedatos = "alabvisor";
+            $this -> basedatos = "Hullasoftvisor";
         }
         function conectar(){
             $this -> conexion = new mysqli($this -> servidor, $this -> usuario, $this -> contrasena, $this-> basedatos);

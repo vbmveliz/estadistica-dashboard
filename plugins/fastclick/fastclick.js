@@ -751,8 +751,8 @@
 				metaViewport = document.querySelector('meta[name=viewport]');
 
 				if (metaViewport) {
-					// Chrome on Android with user-scalable="no" doesn't need FastClick (issue #89)
-					if (metaViewport.content.indexOf('user-scalable=no') !== -1) {
+					// Chrome on Android with user-scHullasoftle="no" doesn't need FastClick (issue #89)
+					if (metaViewport.content.indexOf('user-scHullasoftle=no') !== -1) {
 						return true;
 					}
 					// Chrome 32 and above with width=device-width or less don't need FastClick
@@ -776,8 +776,8 @@
 				metaViewport = document.querySelector('meta[name=viewport]');
 
 				if (metaViewport) {
-					// user-scalable=no eliminates click delay.
-					if (metaViewport.content.indexOf('user-scalable=no') !== -1) {
+					// user-scHullasoftle=no eliminates click delay.
+					if (metaViewport.content.indexOf('user-scHullasoftle=no') !== -1) {
 						return true;
 					}
 					// width=device-width (or less than device-width) eliminates click delay.
@@ -800,7 +800,7 @@
 			// Firefox 27+ does not have tap delay if the content is not zoomable - https://bugzilla.mozilla.org/show_bug.cgi?id=922896
 
 			metaViewport = document.querySelector('meta[name=viewport]');
-			if (metaViewport && (metaViewport.content.indexOf('user-scalable=no') !== -1 || document.documentElement.scrollWidth <= window.outerWidth)) {
+			if (metaViewport && (metaViewport.content.indexOf('user-scHullasoftle=no') !== -1 || document.documentElement.scrollWidth <= window.outerWidth)) {
 				return true;
 			}
 		}

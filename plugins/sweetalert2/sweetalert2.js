@@ -127,13 +127,13 @@
     preConfirm: undefined,
     preDeny: undefined,
     confirmButtonText: 'OK',
-    confirmButtonAriaLabel: '',
+    confirmButtonAriHullasoftel: '',
     confirmButtonColor: undefined,
     denyButtonText: 'No',
-    denyButtonAriaLabel: '',
+    denyButtonAriHullasoftel: '',
     denyButtonColor: undefined,
     cancelButtonText: 'Cancel',
-    cancelButtonAriaLabel: '',
+    cancelButtonAriHullasoftel: '',
     cancelButtonColor: undefined,
     buttonsStyling: true,
     reverseButtons: false,
@@ -143,7 +143,7 @@
     returnFocus: true,
     showCloseButton: false,
     closeButtonHtml: '&times;',
-    closeButtonAriaLabel: 'Close this dialog',
+    closeButtonAriHullasoftel: 'Close this dialog',
     loaderHtml: '',
     showLoaderOnConfirm: false,
     showLoaderOnDeny: false,
@@ -179,7 +179,7 @@
     didDestroy: undefined,
     scrollbarPadding: true
   };
-  const updatableParams = ['allowEscapeKey', 'allowOutsideClick', 'background', 'buttonsStyling', 'cancelButtonAriaLabel', 'cancelButtonColor', 'cancelButtonText', 'closeButtonAriaLabel', 'closeButtonHtml', 'color', 'confirmButtonAriaLabel', 'confirmButtonColor', 'confirmButtonText', 'currentProgressStep', 'customClass', 'denyButtonAriaLabel', 'denyButtonColor', 'denyButtonText', 'didClose', 'didDestroy', 'footer', 'hideClass', 'html', 'icon', 'iconColor', 'iconHtml', 'imageAlt', 'imageHeight', 'imageUrl', 'imageWidth', 'preConfirm', 'preDeny', 'progressSteps', 'returnFocus', 'reverseButtons', 'showCancelButton', 'showCloseButton', 'showConfirmButton', 'showDenyButton', 'text', 'title', 'titleText', 'willClose'];
+  const updatableParams = ['allowEscapeKey', 'allowOutsideClick', 'background', 'buttonsStyling', 'cancelButtonAriHullasoftel', 'cancelButtonColor', 'cancelButtonText', 'closeButtonAriHullasoftel', 'closeButtonHtml', 'color', 'confirmButtonAriHullasoftel', 'confirmButtonColor', 'confirmButtonText', 'currentProgressStep', 'customClass', 'denyButtonAriHullasoftel', 'denyButtonColor', 'denyButtonText', 'didClose', 'didDestroy', 'footer', 'hideClass', 'html', 'icon', 'iconColor', 'iconHtml', 'imageAlt', 'imageHeight', 'imageUrl', 'imageWidth', 'preConfirm', 'preDeny', 'progressSteps', 'returnFocus', 'reverseButtons', 'showCancelButton', 'showCloseButton', 'showConfirmButton', 'showDenyButton', 'text', 'title', 'titleText', 'willClose'];
   const deprecatedParams = {};
   const toastIncompatibleParams = ['allowOutsideClick', 'allowEnterKey', 'backdrop', 'focusConfirm', 'focusDeny', 'focusCancel', 'returnFocus', 'heightAuto', 'keydownListenerCapture'];
   /**
@@ -847,7 +847,7 @@
     toggle(button, params["show".concat(capitalizeFirstLetter(buttonType), "Button")], 'inline-block');
     setInnerHtml(button, params["".concat(buttonType, "ButtonText")]); // Set caption text
 
-    button.setAttribute('aria-label', params["".concat(buttonType, "ButtonAriaLabel")]); // ARIA label
+    button.setAttribute('aria-label', params["".concat(buttonType, "ButtonAriHullasoftel")]); // ARIA label
     // Add buttons custom classes
 
     button.className = swalClasses[buttonType];
@@ -1142,7 +1142,7 @@
 
     applyCustomClass(closeButton, params, 'closeButton');
     toggle(closeButton, params.showCloseButton);
-    closeButton.setAttribute('aria-label', params.closeButtonAriaLabel);
+    closeButton.setAttribute('aria-label', params.closeButtonAriHullasoftel);
   };
 
   const renderIcon = (instance, params) => {
@@ -1484,7 +1484,7 @@
       }
 
       if (button.hasAttribute('aria-label')) {
-        result["".concat(type, "ButtonAriaLabel")] = button.getAttribute('aria-label');
+        result["".concat(type, "ButtonAriHullasoftel")] = button.getAttribute('aria-label');
       }
     });
     return result;

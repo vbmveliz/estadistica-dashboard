@@ -61,7 +61,7 @@ $(function () {
         }else if(code == "lim"){
           var sede = "Sede Guardia Chalaca";
         }else{
-          alert("Solamente departamentos donde tiene sede ALAB");
+          alert("Solamente departamentos donde tiene sede Hullasoft");
         }
         $('#sales-chart').empty();
         const myTimeout1 = setTimeout(myGreeting1, 100);
@@ -229,6 +229,9 @@ $('#btnConsultarEstado').click(function(){
       `
       $('#tablaResumen').html(template);
       $('#total').html(templatetotal);
+      $('#tablaDetalleInicio').DataTable({
+        "language": idioma_espanol
+    });
     }
   })
   $.ajax({
